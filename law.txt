@@ -1,0 +1,44 @@
+FITUR
+
+1.login --> Nono
+2.logout --> Maldy
+3.signup --> Juan
+
+4.post question --> Nono
+5.post answer --> Maldy
+6.rate answer --> Juan
+7.transfer poin --> Nono
+8.halaman utama --> Maldy
+9.lihat edit profile --> Juan
+
+1 --> halaman utama --> bisa pencet buat sign up ke halaman sign up
+
+setelah login, tampilkan 
+	1. "latest questions"
+	2. ada tab pertanyaan "my questions"
+	3. ada tab "all categories"
+
+Profile di kanannya	
+bawahnya Post new question di kanan semua halaman
+bawahnya leaderboard
+
+search diatas
+
+klik new question
+1. title
+2. categories
+3. isi
+4. upload file
+
+klik question
+1. tampil isi question
+2. tampil post question
+3. tampil list jawaban
+
+klik rate answer di tiap jawaban
+
+klik transfer poin
+1. muncul halaman transfer
+2. disitu ada search orang dan nilai poin yang mau ditransfer
+
+klik profile di samping --> ganti halaman ke lihat data pribadi
