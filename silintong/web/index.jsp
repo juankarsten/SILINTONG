@@ -12,6 +12,20 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Sign Up</h1>
+        <form action="signupcontroller" method="post">
+            <div>
+                <input type="text" name="fullname" />
+            </div>
+            <div>
+                <input type="email" name="email" />
+            </div>
+            <div>
+                <input type="password" name="pass" />
+            </div>
+            <div>
+                <input type="submit"/>
+            </div>
+        </form>
     </body>
 </html>
