@@ -9,22 +9,30 @@ package com.silintong.model;
  * @author juan.karsten
  */
 public class User {
-    private String name;
+    private String fname;
+    private String lname;
     private String pass;
     private String email;
 
-    public User(String name, String pass, String email) {
-        this.name = name;
+    public User(String fname,String lname, String pass, String email) {
+        this.fname = fname;
         this.pass = pass;
         this.email = email;
+        this.lname=lname;
     }
+
+    public String getLname() {
+        return lname;
+    }
+    
+    
 
     public String getEmail() {
         return email;
     }
 
-    public String getName() {
-        return name;
+    public String getFName() {
+        return fname;
     }
 
     public String getPass() {
@@ -35,9 +43,15 @@ public class User {
         this.email = email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFName(String fname) {
+        this.fname = fname;
     }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+    
+    
 
     public void setPass(String pass) {
         this.pass = pass;

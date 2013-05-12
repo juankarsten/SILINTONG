@@ -4,6 +4,7 @@
     Author     : juan.karsten
 --%>
 
+<%@page import="com.silintong.extra.Validator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,19 +14,29 @@
     </head>
     <body>
         <h1>Sign Up</h1>
-        <form action="signupcontroller" method="post">
+        <form action="complete%20signup" method="post">
             <div>
-                <input type="text" name="fullname" />
+                First Name:<input type="text" name="firstname" />
+                Last Name:<input type="text" name="lastname" />
             </div>
             <div>
-                <input type="email" name="email" />
+                Email: <input type="email" name="email" />
             </div>
             <div>
-                <input type="password" name="pass" />
+                Password: <input type="password" name="pass" />
+            </div>
+            <div>
+                Retype Password: <input type="password" name="pass2" />
             </div>
             <div>
                 <input type="submit"/>
             </div>
         </form>
+        <%
+            String error=request.getParameter("error");
+            if(Validator.isExist(error)){
+                out.print("Complete "+error);
+            }
+            %>
     </body>
 </html>
