@@ -9,5 +9,7 @@ package com.silintong.db;
  * @author juan.karsten
  */
 public class DBSettings {
-    
+    public static String USER="";
+    public static String PASSWORD="";
+    public static String URL="jdbc:mysql://localhost/books";
 }
