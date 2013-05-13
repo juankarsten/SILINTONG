@@ -27,7 +27,7 @@
                 <div class ='large-4 columns'>
                     <br />
                     <div id='loginbox'>
-                        <form action = "LoginController" method = "post" enctype="multipart/form-data">                 
+                        <form action = "LoginController" method = "post" >                 
                            <div class="small-3 columns">
                                 <label for="right-label" class="right inline">Username</label>
                                 <label for="right-label" class="right inline">Password</label>
@@ -35,8 +35,8 @@
                             
                             <div class="small-9 columns">
                                 <input type="text" id="right-label" placeholder="Username" name="namauser"/>
-                                <input type="password" id="right-label" placeholder="Password" name='katasandi'/>
-                                <input type ='submit' value ='Login' class='button right'/>
+                                <input type="password" id="right-label" placeholder="Password" name="katasandi"/>
+                                <input type ="submit" value ="Login" class="button right"/>
                             </div>
                         </form>
                     </div>
