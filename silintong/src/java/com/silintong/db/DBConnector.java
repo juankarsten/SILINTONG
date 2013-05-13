@@ -28,24 +28,19 @@ public class DBConnector {
         
     }
     
-    public void insertUser(User user){
-        String insertTableSQL = "INSERT INTO USER VALUES (?,?,?,?,?,?,?,?,?)";
+    
+    
+    public Connection getConnection(){
+        return dbConnection;
+    }
+    
+    public void closeConnection(){
         try {
-            PreparedStatement statement=dbConnection.prepareStatement(insertTableSQL);
-            statement.setString(2, user.getUsername());
-            statement.setString(3, user.getPass());
-            statement.setString(4, user.getFName());
-            statement.setString(5, user.getLname());
-            statement.setString(6, user.getBday());
-            statement.setString(7, user.getSex());
-            statement.setInt(8, user.getPoint());
-            statement.setString(9, user.getFoto());
-            statement.execute();
-            statement.close();
+            
+            dbConnection.close();
         } catch (SQLException ex) {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
     public ResultSet getLatestQuestions() throws SQLException{
