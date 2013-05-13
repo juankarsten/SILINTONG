@@ -115,6 +115,7 @@ select {
     .row .row:after {
       clear: both; }
     .row .row.collapse {
+      background:#111;
       width: auto;
       margin: 0;
       max-width: none;
