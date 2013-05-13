@@ -4,19 +4,18 @@
  */
 package com.silintong.controller;
 
-import com.silintong.db.DBConnector;
-import com.silintong.model.Question;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,8 +25,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author GG
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "NewQuestionController", urlPatterns = {"/NewQuestionController"})
+public class NewQuestionController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -42,51 +41,37 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         try{
-            String username = request.getParameter("namauser");
-            String password = request.getParameter("katasandi");
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
+        try {
+            /*HttpSession session = request.getSession( true );
+            Enumeration usersession = session.getAttributeNames();
+            String username = usersession.nextElement().toString();*/
+            String username = "Johny";
+            String judul=request.getParameter("judul");
+            String isi=request.getParameter("isipertanyaan");
+            String deadline=request.getParameter("deadline");
+            String poin=request.getParameter("poin");
+            String kategori = request.getParameter("kategori");
+            String filetambahan=request.getParameter("filetambahan");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            String tanggalhariini= dateFormat.format(date).toString();
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/silintong", "root", "toor");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from user where username ='" + username + "' and password='" + password + "'");
-            int count = 0;
-            while (rs.next()) {
-                    count++;
-            }
-            rs.first();
-            if (count > 0) {
-                    /*HttpSession session = request.getSession( true );
-                    session.setAttribute(username, username);*/
-                    DBConnector db = new DBConnector();
-                    ResultSet resultSet = db.getLatestQuestions();
-
-                    ArrayList<Question> listOfQuestions = new ArrayList<Question>();
-
-                    while (resultSet.next()) {
-
-                        String idQuestion = ""+resultSet.getObject(1);
-                        String idCategory = ""+resultSet.getObject(2);
-                        String title = ""+resultSet.getObject(3);
-                        String content = ""+resultSet.getObject(4);
-                        String dateposted = ""+resultSet.getObject(5);
-                        String duedate = ""+resultSet.getObject(6);
-
-                        Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,0,idCategory,null);
-                        listOfQuestions.add(qst);
-                    }
-
-                    request.setAttribute("latestQuestion", listOfQuestions);
-                    RequestDispatcher view=request.getRequestDispatcher("home.jsp");
-                    view.forward(request, response);
-            } 
-            
+            ResultSet idkat = st.executeQuery("SELECT idcategory from category where namecategory='"+kategori+"'");
+            out.println(idkat);   
+            String idkategori = idkat.getObject(0).toString();         
+            out.println(idkategori); 
+            Boolean checkIQ;
+            checkIQ = st.execute("INSERT INTO Question values ("+judul+","+isi+","+username+","+0+","+tanggalhariini+","+deadline+","+poin+","+idkategori+","+filetambahan+","+")");
+            if (checkIQ) {
+                response.sendRedirect("home.jsp");
+            }    
             else {
-                    response.sendRedirect("index.jsp");
+                response.sendRedirect("postquestion.jsp");
             }
-            
         }
-        catch (Exception e){
+        catch (Exception e) {            
             
         }
     }
@@ -104,7 +89,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**
@@ -119,7 +104,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);         
+        processRequest(request, response);
     }
 
     /**

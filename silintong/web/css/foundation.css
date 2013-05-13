@@ -10,7 +10,7 @@ body {
   font-size: 100%; }
 
 body {
-  background: white;
+  background: #eaeaea;
   color: #222222;
   padding: 0;
   margin: 0;
@@ -81,6 +81,7 @@ select {
 
 /* Grid HTML Classes */
 .row {
+  background-color:#FFFFFF;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
