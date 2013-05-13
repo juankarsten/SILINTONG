@@ -13,36 +13,69 @@
         <title>Complete Your Profile</title>
     </head>
     <body>
-        <%
-            User user=(User)request.getAttribute("user");
-        %>
         
         <h1>Complete Your Profile</h1>
-        <form action="CompleteSignUpController" method="post">
+        <form action="SignUpCompleted" method="post" enctype="multipart/form-data">
+            
             <div>
-                First Name:<input type="text" name="firstname" value=<%=user.getFName()%> />
-                Last Name:<input type="text" name="lastname" value=<%=user.getLname()%> />
+                First Name: <input type="text" name="firstname" placeholder="first name" />
+                Last Name: <input type="text" name="lastname" placeholder="last name" />
             </div>
             <div>
-                username:<input type="text" name="username"  value=<%=user.getFName()+"."+user.getLname()%> />
+                Username: <input type="text" name="username"  placeholder="username" />
             </div>
             <div>
-                Email: <input type="email" name="email" value=<%=user.getEmail()%> />
+                Password: <input type="password" name="pass" placeholder="password" />
+            </div>
+            <div>
+                Retype Password: <input type="password" name="pass2" placeholder="retype password" />
+            </div>
+            <div>
+                Email: <input type="email" name="email" placeholder="email" />
             </div>
             <div>
                 <div>
                     Sex:
                 </div>
                 <div>
-                    <input type="radio" name="sex" value="male"/>Male
+                    <input type="radio" name="sex" value="male" checked/>Male
                     <input type="radio" name="sex" value="female"/>Female
                 </div>
             </div>
             <div>
-                Birthday: <input type="date" name="bday">
+                Birthday: 
+                <select name="datebday">
+                    <%
+                        for (int ii=1; ii<=31;ii++){
+                            out.print("<option>"+ii+"</option>");
+                        }
+                    %>
+                </select>
+                <select name="monthbday">
+                    <%
+                        String[] months={
+                            "January","February","March","April","May","June",
+                            "July","August","September","October","November","December"
+                        };
+                        for (int ii=0; ii<months.length;ii++){
+                            out.print("<option>"+months[ii]+"</option>");
+                        }
+                    %>
+                </select>
+                <select name="yearbday">
+                    <%
+                        for (int ii=1900; ii<=2013;ii++){
+                            out.print("<option>"+ii+"</option>");
+                        }
+                    %>
+                </select>
             </div>
+                <div>
+                    <div><h4>Choose Photo</h4></div>
+                    <div><input type="file" name="foto" /></div>
+                </div>
             <div>
-                <input type="submit"/>
+                <input type="submit" value="sign up"/>
             </div>
         </form>
     </body>

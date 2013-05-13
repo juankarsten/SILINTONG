@@ -4,6 +4,13 @@
  */
 package com.silintong.model;
 
+import com.silintong.db.DBConnector;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author juan.karsten
@@ -19,12 +26,32 @@ public class User {
     private int point;
     private String foto;
 
-    public User(String fname,String lname, String pass, String email) {
-        this.fname = fname;
-        this.pass = pass;
+    public User(String username, String pass, String email) {
+        this.username=username;
         this.email = email;
         this.lname=lname;
     }
+    
+    public User(String fname,String lname, String pass, String email) {
+        this.fname=fname;
+        this.lname=lname;
+        this.email = email;
+        this.lname=lname;
+    }
+
+    public User(String fname, String lname, String pass, String email, String username, String bday, String sex, int point, String foto) {
+        this.fname = fname;
+        this.lname = lname;
+        this.pass = pass;
+        this.email = email;
+        this.username = username;
+        this.bday = bday;
+        this.sex = sex;
+        this.point = point;
+        this.foto = foto;
+    }
+    
+    
 
     public String getBday() {
         return bday;
@@ -106,4 +133,27 @@ public class User {
         this.pass = pass;
     }
     
+    public void insertUser(){
+        User user=this;
+        DBConnector dBConnector=new DBConnector();
+        Connection dbConnection=dBConnector.getConnection();
+        String insertTableSQL = "INSERT INTO USER VALUES (?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement statement=dbConnection.prepareStatement(insertTableSQL);
+            statement.setString(2, user.getUsername());
+            statement.setString(3, user.getPass());
+            statement.setString(4, user.getFName());
+            statement.setString(5, user.getLname());
+            statement.setString(6, user.getBday());
+            statement.setString(7, user.getSex());
+            statement.setInt(8, user.getPoint());
+            statement.setString(9, user.getFoto());
+            statement.execute();
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dBConnector.closeConnection();
+        
+    }
 }
