@@ -126,7 +126,7 @@
 		<div class="large-3 columns">
 			<h5>Post A New Question</h5>
                         <br/>
-                        <button href="postquestion.jsp" class='small'>Post Now!</button>
+                        <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
 			<h4>Leaderboards</h4>
 			<p>Once you've exhausted the fun in this document, you should check out:</p>
 			<ul class="disc">
