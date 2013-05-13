@@ -56,7 +56,7 @@
 				</form>
                             <div class='large-4 columns'>
                                 <h3>Sign-Up here to start helping others</h3>
-                                <button href='#'>Sign Up</button>
+                                <a href="completesignup.jsp" class="button">Sign Up</a>
                             </div>
 			</div>
 		</div>

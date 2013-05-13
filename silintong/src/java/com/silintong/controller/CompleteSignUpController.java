@@ -42,33 +42,21 @@ public class CompleteSignUpController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response){
+        //inisialisasi out
         PrintWriter out=null;
         try {
             out = response.getWriter();
+        
         } catch (IOException ex) {
             Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {            
-            out.close();
         }
-        
-        String fname=request.getParameter("firstname");
-        String lname=request.getParameter("lastname");
-        String email=request.getParameter("email");
-        String pass=request.getParameter("pass");
-        String username=request.getParameter("username");
-        String sex=request.getParameter("sex");
-        String datebday=request.getParameter("datebday");
-        String monthbday=request.getParameter("monthbday");
-        String yearbday=request.getParameter("yearbday");
-        String foto=request.getParameter("foto");
-        List<FileItem> items;
+
+        //cari foto
+        List<FileItem> items=null;
         InputStream filecontent = null;
-        /*
         try {
             items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-            
             for (FileItem item : items) {
                 if(item.getFieldName().equals("foto"))
                 {
@@ -80,26 +68,77 @@ public class CompleteSignUpController extends HttpServlet {
         } catch (IOException ex) {
             Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
-        String randomFotoFile=UUID.randomUUID().toString()+foto;
-        User user=new User(fname, lname, pass, email, username, yearbday, sex, 500, randomFotoFile);
+        
+        //dapatkan semua nilai field
+        String fname=getFieldItem(items,"firstname");
+        String lname=getFieldItem(items,"lastname");
+        String email=getFieldItem(items,"email");
+        String pass=getFieldItem(items,"pass");
+        String username=getFieldItem(items,"username");
+        String sex=getFieldItem(items,"sex");
+        String datebday=getFieldItem(items,"datebday");
+        String monthbday=getFieldItem(items,"monthbday");
+        String yearbday=getFieldItem(items,"yearbday");
+        String foto=getFieldItem(items,"foto");
+        
+        String[] months={
+        "January","February","March","April","May","June",
+                            "July","August","September","October","November","December"
+        };
+        for(int ii=0;ii<months.length;ii++){
+            if(monthbday.equals(months[ii])){
+                monthbday=ii+"";
+                
+            }
+        }
+        String randomFotoFile=UUID.randomUUID().toString();
+        randomFotoFile+=UUID.randomUUID().toString();
+        randomFotoFile=randomFotoFile.substring(0,(randomFotoFile.length()>40)?40:randomFotoFile.length())+".png";
+        out.print(randomFotoFile.length());
+        User user=new User(fname, lname, pass, email, username, yearbday+"-"+monthbday+"-"+datebday, sex, 500, randomFotoFile);
+        FileOutputStream outputStream=null;
         try {
-            FileOutputStream outputStream = 
-                        new FileOutputStream(new File(randomFotoFile));
+            File file=new File(randomFotoFile);
+            outputStream=new FileOutputStream(file);
             int read = 0;
-		byte[] bytes = new byte[1024];
-		while ((read = filecontent.read(bytes)) != -1) {
-			outputStream.write(bytes, 0, read);
-		}
+            if (!file.exists()) {
+		file.createNewFile();
+            }
+            byte[] bytes = new byte[1024];	
+            while ((read = filecontent.read(bytes)) != -1) {
+                    	outputStream.write(bytes, 0, read);
+            }
+            outputStream.close();
+            filecontent.close();
         } catch (FileNotFoundException ex) {
+            out.print(ex);
             Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            out.print(ex);
             Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        user.insertUser();
+        out.print(user.insertUser(out));
         
         
+        try {
+            response.sendRedirect("index.jsp");
+        } catch (IOException ex) {
+            out.print(ex);
+            Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        out.close();
+    }
+    
+    public String getFieldItem(List<FileItem> items,String fieldname){
+        
+            for (FileItem item : items) {
+                if(item.getFieldName().equals(fieldname))
+                {
+                    return item.getString();
+                }
+            }
+           return "gagal";
         
     }
 
