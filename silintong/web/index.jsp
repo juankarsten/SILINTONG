@@ -27,7 +27,7 @@
                 <div class ='large-4 columns'>
                     <br />
                     <div id='loginbox'>
-                        <form action = "LoginController" method = "post" >                 
+                        <form action = "LatestQuestionsController" method = "post" >                 
                            <div class="small-3 columns">
                                 <label for="right-label" class="right inline">Username</label>
                                 <label for="right-label" class="right inline">Password</label>

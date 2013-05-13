@@ -1,29 +1,45 @@
 <%-- 
-    Document   : index
-    Created on : May 11, 2013, 12:58:46 PM
-    Author     : dwi.novanto
+    Document   : mainpage
+    Created on : May 13, 2013, 11:11:04 AM
+    Author     : ALdY
 --%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.silintong.model.Question"%>
-<%@page import="com.silintong.extra.Validator"%>
+<%@page import="java.sql.ResultSetMetaData"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="css/foundation.css" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SILINGTONG</title>
-    </head>
-    <body>
-         <div class="row">
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>SiLINTONG : Sistem Informasi Saling Tolong</title>
+
+  
+  <link rel="stylesheet" href="css/foundation.css" />
+  
+
+  <script src="js/vendor/custom.modernizr.js"></script>
+
+</head>
+<body>
+
+	<div class="row">
 		<div class="large-9 columns">
-                    <h2>SiLINTONG</h2>
-                    <p id="subname">Sistem Informasi Saling Tolong</p>
+			<h2>SiLINTONG</h2>
+			<p>Sistem Informasi Saling Tolong</p>
+
 		</div>
                 <div class="large-3 columns">
-                    <h3>Hello, [User]!</h3>
-                    <p>Edit Profile!</p>	
+                            <h3>Hello, [User]!</h3>
+                            <p>Edit Profile</p>
+			
 		</div>
                 <hr />
 	</div>
@@ -68,17 +84,20 @@
                             out.print("<td>");
                             out.print("Category");
                             out.print("</td>");
-                            out.print("<td>");
+                            out.print("<td width='290'>");
                             out.print("Title");
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print("Content");
                             out.print("</td>");
                             out.print("<td>");
                             out.print("Posted");
                             out.print("</td>");
                             out.print("<td>");
                             out.print("Duedate");
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print("Points");
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print("Action");
                             out.print("</td>");
                         out.print("</tr>");    
                     out.print("</thead>");
@@ -87,19 +106,25 @@
                         for(int cnt=0;cnt<listOfQst.size();cnt++){
                             out.print("<tr>");
                                 out.print("<td>");  
-                                out.print(listOfQst.get(0).getIdcategories());
+                                out.print(listOfQst.get(cnt).getIdcategories());
                                 out.print("</td>");
                                 out.print("<td>");  
-                                out.print(listOfQst.get(0).getTitle());
+                                out.print(listOfQst.get(cnt).getTitle());
                                 out.print("</td>");
                                 out.print("<td>");  
-                                out.print(listOfQst.get(0).getContent());
+                                out.print(listOfQst.get(cnt).getDateposted());
                                 out.print("</td>");
                                 out.print("<td>");  
-                                out.print(listOfQst.get(0).getDateposted());
+                                out.print(listOfQst.get(cnt).getDuedate());
                                 out.print("</td>");
                                 out.print("<td>");  
-                                out.print(listOfQst.get(0).getDuedate());
+                                out.print(listOfQst.get(cnt).getPoint());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print("<br>");                                 
+                                out.print("<form>");
+                                out.print("<input class='small button' type='submit' value='Details'>");
+                                out.print("</form>");
                                 out.print("</td>");
                             out.print("</tr>");
                         } 
@@ -126,6 +151,7 @@
 			</ul>
 		</div>
 	</div>
+
   <script>
   document.write('<script src=' +
   ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
@@ -133,8 +159,41 @@
   </script>
   
   <script src="js/foundation.min.js"></script>
+  <!--
+  
+  <script src="js/foundation/foundation.js"></script>
+  
+  <script src="js/foundation/foundation.dropdown.js"></script>
+  
+  <script src="js/foundation/foundation.placeholder.js"></script>
+  
+  <script src="js/foundation/foundation.forms.js"></script>
+  
+  <script src="js/foundation/foundation.alerts.js"></script>
+  
+  <script src="js/foundation/foundation.magellan.js"></script>
+  
+  <script src="js/foundation/foundation.reveal.js"></script>
+  
+  <script src="js/foundation/foundation.tooltips.js"></script>
+  
+  <script src="js/foundation/foundation.clearing.js"></script>
+  
+  <script src="js/foundation/foundation.cookie.js"></script>
+  
+  <script src="js/foundation/foundation.joyride.js"></script>
+  
+  <script src="js/foundation/foundation.orbit.js"></script>
+  
+  <script src="js/foundation/foundation.section.js"></script>
+  
+  <script src="js/foundation/foundation.topbar.js"></script>
+  
+  -->
+  
   <script>
     $(document).foundation();
   </script>
-    </body>
+</body>
 </html>
+
