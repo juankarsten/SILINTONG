@@ -65,6 +65,7 @@ public class CompleteSignUpController extends HttpServlet {
         String foto=request.getParameter("foto");
         List<FileItem> items;
         InputStream filecontent = null;
+        /*
         try {
             items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
             
@@ -79,7 +80,7 @@ public class CompleteSignUpController extends HttpServlet {
         } catch (IOException ex) {
             Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        */
         String randomFotoFile=UUID.randomUUID().toString()+foto;
         User user=new User(fname, lname, pass, email, username, yearbday, sex, 500, randomFotoFile);
         try {

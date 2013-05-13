@@ -52,13 +52,14 @@ public class LatestQuestionsController extends HttpServlet {
             while (resultSet.next()) {
  
                 String idQuestion = ""+resultSet.getObject(1);
-                String idCategory = ""+resultSet.getObject(2);
+                String nameCategory = ""+resultSet.getObject(2);
                 String title = ""+resultSet.getObject(3);
                 String content = ""+resultSet.getObject(4);
                 String dateposted = ""+resultSet.getObject(5);
                 String duedate = ""+resultSet.getObject(6);
+                String point = ""+resultSet.getObject(7);
 
-                Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,0,idCategory,null);
+                Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,Integer.parseInt(point),nameCategory,null);
                 listOfQuestions.add(qst);
             }
            

@@ -44,7 +44,7 @@ public class DBConnector {
     }
     
     public ResultSet getLatestQuestions() throws SQLException{
-        String query = "SELECT idquestion,idcategory, title, content, dateposted, duedate FROM QUESTION ORDER BY dateposted DESC LIMIT 0 , 10";
+        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven FROM QUESTION q,CATEGORY c WHERE q.idcategory=c.idcategory ORDER BY dateposted DESC LIMIT 0 , 10";
          Statement statement = dbConnection.createStatement();
          ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
