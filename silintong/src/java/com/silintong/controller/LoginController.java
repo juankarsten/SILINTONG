@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author GG
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
+@WebServlet(name = "LoginController", urlPatterns = {"/home"})
 public class LoginController extends HttpServlet {
 
     /**
@@ -47,9 +47,8 @@ public class LoginController extends HttpServlet {
             String password = request.getParameter("katasandi");
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             PrintWriter out = response.getWriter();
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/silintong", "root", "toor");
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from user where username ='" + username + "' and password='" + password + "'");
+            DBConnector db = new DBConnector();
+            ResultSet rs = db.login(username, password);
             int count = 0;
             while (rs.next()) {
                     count++;
@@ -58,7 +57,6 @@ public class LoginController extends HttpServlet {
             if (count > 0) {
                     HttpSession session = request.getSession( true );
                     session.setAttribute(username, username);
-                    DBConnector db = new DBConnector();
                     ResultSet resultSet = db.getLatestQuestions();
 
                     ArrayList<Question> listOfQuestions = new ArrayList<Question>();
