@@ -125,7 +125,9 @@ select {
 #subname {
     color:#b0b0b0;
 }
-
+#loginbox li{
+    display:inline-block;
+}
 .column,
 .columns {
   position: relative;
