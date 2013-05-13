@@ -4,12 +4,17 @@
     Author     : dwi.novanto
 --%>
 
+<%@page import="java.util.Enumeration"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.silintong.model.Question"%>
 <%@page import="com.silintong.extra.Validator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
+<%
+            Enumeration usersession = session.getAttributeNames();
+%>
     <head>
         <link rel="stylesheet" href="css/foundation.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,11 +23,15 @@
     <body>
          <div class="row">
 		<div class="large-9 columns">
-                    <h2>SiLINTONG</h2>
+                    <h2>SILINTONG</h2>
                     <p id="subname">Sistem Informasi Saling Tolong</p>
 		</div>
                 <div class="large-3 columns">
-                    <h3>Hello, [User]!</h3>
+                    <h3>Hello, 
+                   <%
+                        String username = usersession.nextElement().toString(); 
+                        out.print(username);
+                    %>!</h3>
                     <p>Edit Profile!</p>	
 		</div>
                 <hr />

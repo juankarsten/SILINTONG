@@ -56,8 +56,8 @@ public class LoginController extends HttpServlet {
             }
             rs.first();
             if (count > 0) {
-                    /*HttpSession session = request.getSession( true );
-                    session.setAttribute(username, username);*/
+                    HttpSession session = request.getSession( true );
+                    session.setAttribute(username, username);
                     DBConnector db = new DBConnector();
                     ResultSet resultSet = db.getLatestQuestions();
 
