@@ -49,4 +49,11 @@ public class DBConnector {
          ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
     }
+    
+    public ResultSet login(String username, String password) throws SQLException{
+        String query = "select * from user where username ='" + username + "' and password='" + password + "'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
 }

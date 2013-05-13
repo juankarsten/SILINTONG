@@ -37,9 +37,18 @@
 
 		</div>
                 <div class="large-3 columns">
+<<<<<<< HEAD
                             <h3>Hello, [User]!</h3>
                             <p>Edit Profile</p>
 			
+=======
+                    <h3>Hello, 
+                   <%
+                        String username = usersession.nextElement().toString(); 
+                        out.print(username);
+                    %>!</h3>
+                    <p>Edit Profile</p>	
+>>>>>>> 5411776f4fad16093b593b4a2ec02c13ca6cd741
 		</div>
                 <hr />
 	</div>
@@ -138,10 +147,11 @@
             %>
          
             </div>
+            
 		<div class="large-3 columns">
 			<h5>Post A New Question</h5>
-			<p>We're stoked you want to try Foundation! To get going, this file (index.html) includes some basic styles you can modify, play around with, or totally destroy to get going.</p>
-
+                        <br/>
+                        <button href="postquestion.jsp" class='small'>Post Now!</button>
 			<h4>Leaderboards</h4>
 			<p>Once you've exhausted the fun in this document, you should check out:</p>
 			<ul class="disc">
