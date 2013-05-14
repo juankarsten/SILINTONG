@@ -40,7 +40,7 @@
                         String username = usersession.nextElement().toString();
                         out.print(username);
                     %>!</h3>
-                <p>Edit Profile</p>	
+                <p><a href="editprofile.jsp" class="button">Edit Profile</a></p>		
                 <a href="Logout" class='alert button tiny round right'>
                     Logout
                 </a>
@@ -80,7 +80,7 @@
             </nav>
 
             <div class="small-9 columns">
-                <legend><h3>Kategori Umum</h3></legend>
+                <legend><h3>Kategori Hiburan</h3></legend>
                 <hr/>
             </div>
             <div class="large-3 columns">

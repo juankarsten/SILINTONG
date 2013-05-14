@@ -59,6 +59,10 @@
                                         <img src="img/helphand.jpg">
                                         <div class="orbit-caption">Helping others is fun!</div>
                                     </li>
+                                    <li>
+                                        <img src="img/morning.jpg">
+                                        <div class="orbit-caption">Let's Help Others Everyday!</div>
+                                    </li>
                                 </ul>
                             </div>
                         </fieldset>
