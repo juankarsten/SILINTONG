@@ -56,4 +56,15 @@ public class DBConnector {
         ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
     }
+    
+    public ResultSet getMyQuestions(String username) throws SQLException{
+        String query1 ="SELECT iduser FROM user WHERE username='"+username+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query1); 
+        //String idusername = resultSet.getObject(1).toString();
+        //String query = "SELECT * FROM QUESTION q,CATEGORY c WHERE q.idcategory=c.idcategory AND q.idusername = '"+idusername+"'ORDER BY dateposted DESC LIMIT 0 , 15";
+        //statement = dbConnection.createStatement();
+        //resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
 }

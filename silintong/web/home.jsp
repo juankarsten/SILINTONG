@@ -50,6 +50,9 @@
                         out.print(username);
                     %>!</h3>
                     <p>Edit Profile</p>	
+                    <a href="Logout" class='alert button tiny round right'>
+                        Logout
+                    </a>
 		</div>
                 <hr />
 	</div>
@@ -61,9 +64,15 @@
                 <!-- Left Nav Section -->
                 <ul class="left">
                   <li class="divider"></li>
+                  
                   <li class="active"><a href="#">Latest Questions</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">My Questions</a></li>
+                  <li>
+                      <form id="form1" action="myquestions" method="post">
+                          <li><a href="javascript:;" onclick="document.getElementById('form1').submit();">My Questions</a></li>
+                          <input type="hidden" name="username" value="<% out.print(username); %>"/>
+                      </form>
+                  </li>  
                   <li class="divider"></li>
                   <li><a href="#">All Categories</a></li>
                   <li class="divider"></li>
@@ -87,7 +96,8 @@
             <div class="small-9 columns">
             <%
                ArrayList<Question> listOfQst = (ArrayList<Question>)request.getAttribute("latestQuestion");
-               if(!listOfQst.isEmpty()){
+               if(listOfQst != null){
+                   if(!listOfQst.isEmpty()){
                     out.print("<table>");
                     out.print("<thead>");
                         out.print("<tr>");
@@ -141,10 +151,11 @@
                     out.print("</tbody>");
                 out.print("</table>");
                }
-                 else {
+                 
+           }else if(listOfQst == null){
                    out.print("No Questions Posted yet.");
                 }
-               
+
             %>
          
             </div>
