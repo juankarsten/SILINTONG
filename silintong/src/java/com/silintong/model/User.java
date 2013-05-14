@@ -140,7 +140,7 @@ public class User {
         Connection dbConnection=dBConnector.getConnection();
         int hasil=-100;
         String insertTableSQL = "INSERT INTO USER(username,password,firstname,lastname,birthday"
-                + ",sex,poin,fotouser) VALUES (?,?,?,?,?,?,?,?)";
+                + ",sex,poin,fotouser,email) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement statement=dbConnection.prepareStatement(insertTableSQL);
             statement.setString(1, user.getUsername());
@@ -151,6 +151,7 @@ public class User {
             statement.setString(6, user.getSex());
             statement.setInt(7, user.getPoint());
             statement.setString(8, user.getFoto());
+            statement.setString(9, user.getEmail());
             hasil=statement.executeUpdate();
             statement.close();
         } catch (SQLException ex) {

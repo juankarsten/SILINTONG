@@ -47,9 +47,11 @@ public class LoginController extends HttpServlet {
             ResultSet rs = db.login(username, password);
             int count = 0;
             while (rs.next()) {
+                
                     count++;
             }
             rs.first();
+            
             if (count > 0) {
                     HttpSession session = request.getSession( true );
                     session.setAttribute(username, username);
@@ -77,6 +79,7 @@ public class LoginController extends HttpServlet {
             else {
                     response.sendRedirect("index.jsp");
             }
+            db.closeConnection();
             
         }
         catch (Exception e){
