@@ -56,7 +56,7 @@ public class CompleteSignUpController extends HttpServlet {
         //cari foto
         List<FileItem> items=null;
         InputStream filecontent = null;
-        try {
+        /*try {
             items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
             for (FileItem item : items) {
                 if(item.getFieldName().equals("foto"))
@@ -68,7 +68,7 @@ public class CompleteSignUpController extends HttpServlet {
             Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         
         //dapatkan semua nilai field
         String fname=getFieldItem(items,"firstname");

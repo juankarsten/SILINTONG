@@ -30,6 +30,7 @@ import org.apache.el.util.Validation;
  *
  * @author ALdY
  */
+@WebServlet(name = "latestQuestions", urlPatterns = {"/latestQuestions"})
 public class LatestQuestionsController extends HttpServlet {
 
     /** 
@@ -58,15 +59,16 @@ public class LatestQuestionsController extends HttpServlet {
                 String dateposted = ""+resultSet.getObject(5);
                 String duedate = ""+resultSet.getObject(6);
                 String point = ""+resultSet.getObject(7);
+                String user = ""+resultSet.getObject(8);
 
                 Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,Integer.parseInt(point),nameCategory,null);
+                qst.setUsername(user);
                 listOfQuestions.add(qst);
             }
            
             request.setAttribute("latestQuestion", listOfQuestions);
-            RequestDispatcher view=request.getRequestDispatcher("mainpage.jsp");
+            RequestDispatcher view=request.getRequestDispatcher("home.jsp");
             view.forward(request, response);
-            out.println("sini");
         } finally {            
             out.close();
         }
