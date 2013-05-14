@@ -1,6 +1,6 @@
 <%-- 
-    Document   : kategoriumum
-    Created on : May 14, 2013, 6:03:05 PM
+    Document   : paybroforum
+    Created on : May 14, 2013, 8:14:38 PM
     Author     : GG
 --%>
 
@@ -17,7 +17,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>SiLINTONG : Sistem Informasi Saling Tolong</title>
+        <title>SILINTONG : Sistem Informasi Saling Tolong</title>
 
 
         <link rel="stylesheet" href="css/foundation.css" />
@@ -80,7 +80,7 @@
             </nav>
 
             <div class="small-9 columns">
-                <legend><h3>Kategori Umum</h3></legend>
+                <legend><h3>Forum Tanya Jawab Paybro</h3><img src="img/paybro.png" alt='paybro'></legend>
                 <hr/>
             </div>
             <div class="large-3 columns">
@@ -90,6 +90,7 @@
                 <h4>Beli Poin</h4>
                 <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
                 <img src="img/paybro.png" alt='paybro'>
+
             </div>
         </div>
 
