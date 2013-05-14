@@ -4,9 +4,6 @@
  */
 package com.silintong.controller;
 
-import com.silintong.db.DBConnector;
-import com.silintong.extra.Validator;
-import com.silintong.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author juan.karsten
  */
-@WebServlet(name = "EditProfileController", urlPatterns = {"/editprofile"})
-public class EditProfileController extends HttpServlet {
+@WebServlet(name = "SearchController", urlPatterns = {"/SearchController"})
+public class SearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -37,30 +34,8 @@ public class EditProfileController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
-            String username=request.getParameter("username");
-            String id=request.getParameter("id");
-            String poin=request.getParameter("poin");
-            String fname=request.getParameter("fname");
-            String lname=request.getParameter("lname");
-            String pass=request.getParameter("pass");
-            String bday=request.getParameter("bday");
-            String sex=request.getParameter("sex");
-            String foto=request.getParameter("foto");
-            String email=request.getParameter("email");
-            String foto2=request.getParameter("foto2");
+            String search=request.getParameter("search");
             
-            String photo;
-            if(!Validator.isExist(foto)){
-                photo=foto2;
-            }else{
-                photo=foto;
-            }
-            User user=new User(fname, lname, pass, email, username, bday, sex, Integer.parseInt(poin), foto, id);
-            out.println(user.toString());
-            DBConnector dBConnector=new DBConnector();
-            dBConnector.updateUser(user,out);
-            response.sendRedirect("home.jsp");
         } finally {            
             out.close();
         }

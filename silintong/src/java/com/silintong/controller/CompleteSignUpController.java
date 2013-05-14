@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemIterator;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
@@ -109,7 +110,9 @@ public class CompleteSignUpController extends HttpServlet {
             randomFotoFile=UUID.randomUUID().toString();
             randomFotoFile+=UUID.randomUUID().toString();
             randomFotoFile=randomFotoFile.substring(0,(randomFotoFile.length()>40)?40:randomFotoFile.length())+".png";
-            out.print(randomFotoFile.length());
+            out.print(randomFotoFile);
+            
+            
             
             FileOutputStream outputStream=null;
             try {
