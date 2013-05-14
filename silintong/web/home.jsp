@@ -49,14 +49,10 @@
                         String username = usersession.nextElement().toString(); 
                         out.print(username);
                     %>!</h3>
-<<<<<<< HEAD
                     <p><a href="editprofile.jsp" class="button">Edit Profile</p></a>	
-=======
-                    <p>Edit Profile</p>	
                     <a href="Logout" class='alert button tiny round right'>
                         Logout
                     </a>
->>>>>>> 97baa0e7e2774a853622c06415f0d0737948ebe4
 		</div>
                 <hr />
 	</div>
