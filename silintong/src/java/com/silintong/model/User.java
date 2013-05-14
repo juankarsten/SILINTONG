@@ -26,6 +26,7 @@ public class User {
     private String sex;
     private int point;
     private String foto;
+    private String id;
 
     public User(String username, String pass, String email) {
         this.username=username;
@@ -50,6 +51,29 @@ public class User {
         this.sex = sex;
         this.point = point;
         this.foto = foto;
+    }
+
+    public User(String fname, String lname, String pass, String email, String username, String bday, String sex, int point, String foto, String id) {
+        this.fname = fname;
+        this.lname = lname;
+        this.pass = pass;
+        this.email = email;
+        this.username = username;
+        this.bday = bday;
+        this.sex = sex;
+        this.point = point;
+        this.foto = foto;
+        this.id = id;
+    }
+
+    
+    
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
     
     

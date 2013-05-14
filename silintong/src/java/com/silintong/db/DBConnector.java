@@ -88,8 +88,10 @@ public class DBConnector {
            String sex=rs.getObject(7)+"";
            int poin=Integer.parseInt(rs.getObject(8)+"");
            String fotouser=rs.getObject(9)+"";
-           String email=rs.getObject(10).toString();
-           return new User(fname, lname, pass, email, username, bday, sex, poin, fotouser);   
+
+           String email=rs.getObject(10)+"";
+           return new User(fname, lname, pass, email, username, bday, sex, poin, fotouser,id);
+            
         }
         return null;
     }
