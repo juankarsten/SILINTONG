@@ -38,26 +38,25 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         try{
+        PrintWriter out = response.getWriter();
+        try {
             String username = request.getParameter("namauser");
             String password = request.getParameter("katasandi");
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            PrintWriter out = response.getWriter();
             DBConnector db = new DBConnector();
             ResultSet rs = db.login(username, password);
+            out.print(rs);
             int count = 0;
             while (rs.next()) {
-                
-                    count++;
+                count++;
             }
             rs.first();
             
             if (count > 0) {
-                    HttpSession session = request.getSession( true );
-                    session.setAttribute(username, username);
-                    ResultSet resultSet = db.getLatestQuestions();
+                HttpSession session = request.getSession(true);
+                session.setAttribute(username, username);
+                ResultSet resultSet = db.getLatestQuestions();
 
-                    ArrayList<Question> listOfQuestions = new ArrayList<Question>();
+                ArrayList<Question> listOfQuestions = new ArrayList<Question>();
 
                    while (resultSet.next()) {
                         String idQuestion = ""+resultSet.getObject(1);
@@ -73,20 +72,16 @@ public class LoginController extends HttpServlet {
                         qst.setUsername(user);
                         listOfQuestions.add(qst);
                     }
-
-                    request.setAttribute("latestQuestion", listOfQuestions);
-                    RequestDispatcher view=request.getRequestDispatcher("home.jsp");
-                    view.forward(request, response);
+                request.setAttribute("latestQuestion", listOfQuestions);
+                RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+                view.forward(request, response);
             } 
-            
             else {
-                    response.sendRedirect("index.jsp");
+                response.sendRedirect("index.jsp");
             }
-            db.closeConnection();
-            
-        }
-        catch (Exception e){
-            
+        } 
+        catch (Exception e) {
+            out.print(e);   
         }
     }
 
@@ -103,7 +98,6 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
 
     /**
@@ -118,7 +112,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);         
+        processRequest(request, response);
     }
 
     /**

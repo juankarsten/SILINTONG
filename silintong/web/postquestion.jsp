@@ -48,7 +48,7 @@
                         String username = usersession.nextElement().toString(); 
                         out.print(username);
                     %>!</h3>
-                    <p>Edit Profile</p>	
+                    <p><a href="editprofile.jsp" class="button">Edit Profile</a></p>	
 		</div>
                 <hr />
             </div>
@@ -58,36 +58,7 @@
                 <legend>Buat Pertanyaan Baru</legend>
                 <hr/>
                     <div class="small-9 columns">
-                    <form action="NewQuestionController" method="post">
-                        <label for="judul">Judul Pertanyaan:</label>
-                        <input type="text" id="judul" placeholder="Judul" name="judul"/>
-                        <label for="isipertanyaan">Isi Pertanyaan:</label>
-                        <input type="text" id="isipertanyaan" placeholder="Isi" name="isipertanyaan"/>
-                        <label for="datepicker">Deadline:</label>
-                        <input type="text" id="datepicker" placeholder="Deadline" name="deadline"/>
-                        <label for=poin">Poin yang akan diberikan:</label>
-                        <br/>
-                        <input type="radio" name="poin" value="10"> 10<br/>
-                        <input type="radio" name="poin" value="20"> 20<br/>
-                        <input type="radio" name="poin" value="50"> 50<br/>
-                        <input type="radio" name="poin" value="100"> 100
-                        <br/>
-                        <label for=poin">Kategori Pertanyaan:</label>
-                        <br/>
-                        <select name="kategori">
-                            <option value="Umum">Umum</option> 
-                            <option value="Edukasi">Edukasi</option> 
-                            <option value="Hiburan">Hiburan</option> 
-                            <option value="Paybro">PayBro</option> 
-                            <option value="Rakoon">Rakoon</option> 
-                        </select>
-                        <br/>
-                        <label for="filetambahan">Upload File(Optional):</label>
-                        <br/>
-                        <input type="file" id="filetambahan" placeholder="Upload File" name="filetambahan"/>
-                        <input type ='submit' value ='Buat Pertanyaan' class='button'/>
-                        <input type ='hidden' name='username' value ='<% out.print(username);%>'/>
-                    </form>
+                    
                     </div>
             </div>
         </div>

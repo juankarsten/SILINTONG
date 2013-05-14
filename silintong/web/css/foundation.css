@@ -79,6 +79,10 @@ textarea {
 select {
   width: 100%; }
 
+.orbit-container img{
+    margin:auto;
+}
+
 /* Grid HTML Classes */
 .row {
   background-color:#FFFFFF;

@@ -30,9 +30,7 @@ public class DBConnector {
         }
         
     }
-    
-    
-    
+
     public Connection getConnection(){
         return dbConnection;
     }
@@ -60,6 +58,20 @@ public class DBConnector {
         return resultSet;
     }
     
+    public ResultSet getIdKategori(String namakategori) throws SQLException {
+        String query = "SELECT idcategory from category where namecategory='"+namakategori+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    
+    public ResultSet getIdUsername(String username) throws SQLException {
+        String query = "SELECT iduser from user where username='"+username+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    
     public User searchUsername(String username) throws SQLException{
         String query = "select * from user where username ='" + username + "' ";
         Statement statement = dbConnection.createStatement();
@@ -76,14 +88,13 @@ public class DBConnector {
            String sex=rs.getObject(7)+"";
            int poin=Integer.parseInt(rs.getObject(8)+"");
            String fotouser=rs.getObject(9)+"";
+
            String email=rs.getObject(10)+"";
            return new User(fname, lname, pass, email, username, bday, sex, poin, fotouser,id);
             
         }
-        
         return null;
     }
-
     public ResultSet getMyQuestions(String username) throws SQLException{
         String query ="SELECT iduser FROM user WHERE username='"+username+"'";
         Statement statement = dbConnection.createStatement();
