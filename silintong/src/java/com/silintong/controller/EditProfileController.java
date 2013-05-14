@@ -35,15 +35,17 @@ public class EditProfileController extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditProfileController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditProfileController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String username=request.getParameter("username");
+            request.getParameter("id");
+            request.getParameter("poin");
+            request.getParameter("fname");
+            request.getParameter("lname");
+            request.getParameter("pass");
+            request.getParameter("bday");
+            request.getParameter("sex");
+            request.getParameter("foto");
+            request.getParameter("email");
+            request.getParameter("foto2");
         } finally {            
             out.close();
         }

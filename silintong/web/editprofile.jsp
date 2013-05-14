@@ -53,10 +53,11 @@
              <div class="small-11 columns">
          <fieldset>
                  <legend>Update Profile</legend>
-         <form action="" method="post">
+         <form action="editprofile" method="post">
              <input type="hidden" name="username" value=<%=user.getUsername()%> />
              <input type="hidden" name="id" value=<%=user.getId() %> />
              <input type="hidden" name="poin" value=<%=user.getPoint() %> />
+             <input type="hidden" name="foto2" value=<%=user.getFoto() %> />
                 <div class="row">
                    <div class="small-8 columns">
                       <div class="row">
