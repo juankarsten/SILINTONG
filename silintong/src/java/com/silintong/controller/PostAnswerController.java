@@ -45,8 +45,9 @@ public class PostAnswerController extends HttpServlet {
             db.insertAnswer(content, username, idquestion, dateposted, filename);
             
             response.sendRedirect("LatestQuestionsController");
-        } finally {            
-            out.close();
+        }
+        catch (Exception e) {            
+            out.print(e);
         }
     }
 
