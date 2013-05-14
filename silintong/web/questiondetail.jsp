@@ -4,6 +4,7 @@
     Author     : GG
 --%>
 
+<%@page import="com.silintong.model.Answer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Enumeration"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -74,26 +75,7 @@
                         out.print("<label>Poin: </label>"+QuestionDetail.get(5));
                 %>
                 <hr/>
-                <%
-                    ArrayList<String> answers = (ArrayList<String>)request.getAttribute("answers");
-                    out.print(answers);
-                    if(answers != null){
-                        if(!answers.isEmpty()){
-                             for(int cnt=0;cnt<answers.size();cnt++){
-                                 out.print("<div class='row'>");
-                                 out.print("<div class='large-3 columns'>");
-                                 out.print("<h4>"+answers.get(3)+"</h4>");
-                                 out.print("</div>");
-                                 out.print("</div>");
-                                 out.print("<div class='large-9 columns'>");
-                                 out.print("<p>"+answers.get(2)+"</p>");
-                                 out.print("</div>");
-                                 out.print("</div>");
-                             }
-                         }
-                    }
-                   
-                %>
+                
             </div>
             <div class="large-3 columns">
                 <h5>Post A New Question</h5>
@@ -104,7 +86,35 @@
                 <img src="img/paybro.png" alt='paybro'>
             </div>
         </div>
-
+        <%
+                    ArrayList<Answer> answers = (ArrayList<Answer>)request.getAttribute("answers");
+                    if(answers != null){
+                        if(!answers.isEmpty()){
+                             for(int cnt=0;cnt<answers.size();cnt++){
+                                 out.print("<div class='row'>");
+                                 out.print("<div class='large-3 columns'>");
+                                 out.print("<h4>");
+                                 out.print(answers.get(cnt).getIdusername());
+                                 out.print("</h4>");
+                                 out.print("</div>");
+                                 out.print("<div class='large-9 columns'>");
+                                 out.print(answers.get(cnt).getContent());
+                                 out.print("<hr/>");
+                                 out.print("</div>");                               
+                                 out.print("</div>");                            
+                             }
+                         }
+                    }
+                   
+                %>
+                
+                <div class='row'>
+                    <form method="post" action='PostAnswer'>
+                        <input type='hidden' value='<% out.print(QuestionDetail.get(6)); %>' name='idquestion'/>
+                        <input type='submit'class='button' value ='Answer this Post'>
+                    </form>
+                    </div>
+                    
         <script>
             document.write('<script src=' +
                     ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +

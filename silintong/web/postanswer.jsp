@@ -118,7 +118,9 @@
                         <input type="hidden" value='<% out.print(formattedDate);%>' name="dateposted"/>
                         <input type ='submit' value ='Post Answer' class='button right'/>
                         <input type ='hidden' name='username' value ='<% out.print(username);%>'/>
-                        <input type ='hidden' name='idquestion' value ='<% out.print(4);%>'/>
+                        <input type ='hidden' name='idquestion' value ='<%
+                                String id = (String) request.getAttribute("idp");  
+                                out.print(id); %>'/>
                    </form>
             </div>
             
