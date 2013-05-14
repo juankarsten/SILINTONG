@@ -110,7 +110,9 @@ public class CompleteSignUpController extends HttpServlet {
             randomFotoFile=UUID.randomUUID().toString();
             randomFotoFile+=UUID.randomUUID().toString();
             randomFotoFile=randomFotoFile.substring(0,(randomFotoFile.length()>40)?40:randomFotoFile.length())+".png";
-            out.print(randomFotoFile.length());
+            out.print(randomFotoFile);
+            
+            
             
             FileOutputStream outputStream=null;
             try {
