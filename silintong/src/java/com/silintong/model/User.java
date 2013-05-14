@@ -5,6 +5,7 @@
 package com.silintong.model;
 
 import com.silintong.db.DBConnector;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -133,27 +134,30 @@ public class User {
         this.pass = pass;
     }
     
-    public void insertUser(){
+    public int insertUser(PrintWriter out){
         User user=this;
         DBConnector dBConnector=new DBConnector();
         Connection dbConnection=dBConnector.getConnection();
-        String insertTableSQL = "INSERT INTO USER VALUES (?,?,?,?,?,?,?,?,?)";
+        int hasil=-100;
+        String insertTableSQL = "INSERT INTO USER(username,password,firstname,lastname,birthday"
+                + ",sex,poin,fotouser) VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement statement=dbConnection.prepareStatement(insertTableSQL);
-            statement.setString(2, user.getUsername());
-            statement.setString(3, user.getPass());
-            statement.setString(4, user.getFName());
-            statement.setString(5, user.getLname());
-            statement.setString(6, user.getBday());
-            statement.setString(7, user.getSex());
-            statement.setInt(8, user.getPoint());
-            statement.setString(9, user.getFoto());
-            statement.execute();
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPass());
+            statement.setString(3, user.getFName());
+            statement.setString(4, user.getLname());
+            statement.setString(5, user.getBday());
+            statement.setString(6, user.getSex());
+            statement.setInt(7, user.getPoint());
+            statement.setString(8, user.getFoto());
+            hasil=statement.executeUpdate();
             statement.close();
         } catch (SQLException ex) {
+            out.print(ex);
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
         dBConnector.closeConnection();
-        
+        return hasil;
     }
 }

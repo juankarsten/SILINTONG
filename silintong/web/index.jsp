@@ -23,7 +23,6 @@
                     <div class="large-8 columns">
                         <h1>SILINTONG</h1>
                         <p id="subname">Sistem Informasi Saling Tolong</p>
-
                     </div>
                     <div class ='large-4 columns'>
                         <br />
@@ -45,7 +44,6 @@
                     <hr />
                 </div>
             </div>
-
             <div class="row">
                 <div class="large-12 columns">
                     <div class="row">
@@ -64,9 +62,9 @@
                                 </ul>
                             </div>
                         </fieldset>
-                        <div class='large-4 columns'>
-                            <h3>Sign-Up here to start helping others</h3>
-                            <button href='#'>Sign Up</button>
+                        <div class="large-4 columns">
+                            <h3>Sign up here to start helping others</h3>
+                            <a href=""><button>Sign Up</button></a>
                         </div>
                     </div>
                 </div>
