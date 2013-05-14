@@ -104,6 +104,9 @@
                             out.print("<td>");
                             out.print("Category");
                             out.print("</td>");
+                            out.print("<td>");
+                            out.print("Username");
+                            out.print("</td>");
                             out.print("<td width='290'>");
                             out.print("Title");
                             out.print("</td>");
@@ -127,6 +130,9 @@
                             out.print("<tr>");
                                 out.print("<td>");  
                                 out.print(listOfQst.get(cnt).getIdcategories());
+                                out.print("</td>");
+                                out.print("<td>");  
+                                out.print(listOfQst.get(cnt).getUsername());
                                 out.print("</td>");
                                 out.print("<td>");  
                                 out.print(listOfQst.get(cnt).getTitle());

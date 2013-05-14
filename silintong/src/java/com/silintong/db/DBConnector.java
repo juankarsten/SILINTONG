@@ -44,7 +44,7 @@ public class DBConnector {
     }
     
     public ResultSet getLatestQuestions() throws SQLException{
-        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven FROM QUESTION q,CATEGORY c WHERE q.idcategory=c.idcategory ORDER BY dateposted DESC LIMIT 0 , 10";
+        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser ORDER BY dateposted DESC LIMIT 0 , 10";
          Statement statement = dbConnection.createStatement();
          ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
@@ -58,13 +58,16 @@ public class DBConnector {
     }
     
     public ResultSet getMyQuestions(String username) throws SQLException{
-        String query1 ="SELECT iduser FROM user WHERE username='"+username+"'";
+        String query ="SELECT iduser FROM user WHERE username='"+username+"'";
         Statement statement = dbConnection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query1); 
-        //String idusername = resultSet.getObject(1).toString();
-        //String query = "SELECT * FROM QUESTION q,CATEGORY c WHERE q.idcategory=c.idcategory AND q.idusername = '"+idusername+"'ORDER BY dateposted DESC LIMIT 0 , 15";
-        //statement = dbConnection.createStatement();
-        //resultSet = statement.executeQuery(query); 
+        ResultSet resultSet = statement.executeQuery(query);                                          
+        String idusername = null;
+        while(resultSet.next()){
+            idusername = resultSet.getObject(1).toString();
+        }
+        String query2 = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idusername = '"+idusername+"'ORDER BY dateposted DESC LIMIT 0 , 15";
+        statement = dbConnection.createStatement();
+        resultSet = statement.executeQuery(query2); 
         return resultSet;
     }
 }

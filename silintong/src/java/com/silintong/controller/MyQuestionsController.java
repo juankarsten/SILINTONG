@@ -49,28 +49,26 @@ public class MyQuestionsController extends HttpServlet {
             String username = request.getParameter("username");
             DBConnector db = new DBConnector();
             ResultSet resultSet = db.getMyQuestions(username);
-
-            out.print("lalala");
-            //ArrayList<Question> listOfQuestions = new ArrayList<Question>();
+            //out.print(username);
+            //out.print("lalala");
+            ArrayList<Question> listOfQuestions = new ArrayList<Question>();
             
             while (resultSet.next()) {
- 
-                String idQuestion = ""+resultSet.getObject(1);
-                String nameCategory = ""+resultSet.getObject(2);
-                String title = ""+resultSet.getObject(3);
-                String content = ""+resultSet.getObject(4);
-                String dateposted = ""+resultSet.getObject(5);
-                String duedate = ""+resultSet.getObject(6);
-                String point = ""+resultSet.getObject(7);
-
-                //Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,Integer.parseInt(point),nameCategory,null);
-                //listOfQuestions.add(qst);
+                        String idQuestion = ""+resultSet.getObject(1);
+                        String nameCategory = ""+resultSet.getObject(2);
+                        String title = ""+resultSet.getObject(3);
+                        String content = ""+resultSet.getObject(4);
+                        String dateposted = ""+resultSet.getObject(5);
+                        String duedate = ""+resultSet.getObject(6);
+                        String point = ""+resultSet.getObject(7);
+                        Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,Integer.parseInt(point),nameCategory,null);
+                        listOfQuestions.add(qst);
+                        
             }
            
-            //request.setAttribute("myQuestions", listOfQuestions);
-            //RequestDispatcher view=request.getRequestDispatcher("myquestions.jsp");
-            out.print("lalalala");
-            //view.forward(request, response);*/
+            request.setAttribute("myQuestions", listOfQuestions);
+            RequestDispatcher view=request.getRequestDispatcher("myquestions.jsp");
+            view.forward(request, response);
         } finally {            
             out.close();
         }

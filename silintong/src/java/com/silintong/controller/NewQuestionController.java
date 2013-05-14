@@ -56,7 +56,7 @@ public class NewQuestionController extends HttpServlet {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
             String tanggalhariini= dateFormat.format(date).toString();
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/silintong", "root", "toor");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/silintong", "root", "");
             Statement st = con.createStatement();
             ResultSet idkat = st.executeQuery("SELECT idcategory from category where namecategory='"+kategori+"'");
             String idkategori = idkat.getString("idcategory");
