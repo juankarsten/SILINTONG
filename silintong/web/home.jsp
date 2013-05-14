@@ -49,7 +49,7 @@
                         String username = usersession.nextElement().toString(); 
                         out.print(username);
                     %>!</h3>
-                    <p>Edit Profile</p>	
+                    <p><a href="editprofile.jsp" class="button">Edit Profile</p></a>	
                     <a href="Logout" class='alert button tiny round right'>
                         Logout
                     </a>
@@ -104,6 +104,9 @@
                             out.print("<td>");
                             out.print("Category");
                             out.print("</td>");
+                            out.print("<td>");
+                            out.print("Username");
+                            out.print("</td>");
                             out.print("<td width='290'>");
                             out.print("Title");
                             out.print("</td>");
@@ -127,6 +130,9 @@
                             out.print("<tr>");
                                 out.print("<td>");  
                                 out.print(listOfQst.get(cnt).getIdcategories());
+                                out.print("</td>");
+                                out.print("<td>");  
+                                out.print(listOfQst.get(cnt).getUsername());
                                 out.print("</td>");
                                 out.print("<td>");  
                                 out.print(listOfQst.get(cnt).getTitle());

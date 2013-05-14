@@ -65,7 +65,7 @@
                 <ul class="left">
                   <li class="divider"></li>
                   
-                  <li><a href="#">Latest Questions</a></li>
+                  <li><a href="latestQuestions">Latest Questions</a></li>
                   <li class="divider"></li>
                   <li class="active" ><a href="#">My Questions</a></li>
                   <li class="divider"></li>
@@ -90,7 +90,7 @@
 
             <div class="small-9 columns">
             <%
-               ArrayList<Question> listOfQst = (ArrayList<Question>)request.getAttribute("latestQuestion");
+               ArrayList<Question> listOfQst = (ArrayList<Question>)request.getAttribute("myQuestions");
                if(listOfQst != null){
                    if(!listOfQst.isEmpty()){
                     out.print("<table>");

@@ -50,6 +50,7 @@ public class LoginController extends HttpServlet {
                 count++;
             }
             rs.first();
+            
             if (count > 0) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute(username, username);
@@ -57,18 +58,20 @@ public class LoginController extends HttpServlet {
 
                 ArrayList<Question> listOfQuestions = new ArrayList<Question>();
 
-                while (resultSet.next()) {
-                    String idQuestion = "" + resultSet.getObject(1);
-                    String nameCategory = "" + resultSet.getObject(2);
-                    String title = "" + resultSet.getObject(3);
-                    String content = "" + resultSet.getObject(4);
-                    String dateposted = "" + resultSet.getObject(5);
-                    String duedate = "" + resultSet.getObject(6);
-                    String point = "" + resultSet.getObject(7);
-                    Question qst = new Question(idQuestion, title, content, null, null, dateposted, duedate, Integer.parseInt(point), nameCategory, null);
-                    listOfQuestions.add(qst);
-                }
-
+                   while (resultSet.next()) {
+                        String idQuestion = ""+resultSet.getObject(1);
+                        String nameCategory = ""+resultSet.getObject(2);
+                        String title = ""+resultSet.getObject(3);
+                        String content = ""+resultSet.getObject(4);
+                        String dateposted = ""+resultSet.getObject(5);
+                        String duedate = ""+resultSet.getObject(6);
+                        String point = ""+resultSet.getObject(7);
+                        String user = ""+resultSet.getObject(8);
+                        
+                        Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,Integer.parseInt(point),nameCategory,null);
+                        qst.setUsername(user);
+                        listOfQuestions.add(qst);
+                    }
                 request.setAttribute("latestQuestion", listOfQuestions);
                 RequestDispatcher view = request.getRequestDispatcher("home.jsp");
                 view.forward(request, response);
@@ -76,9 +79,9 @@ public class LoginController extends HttpServlet {
             else {
                 response.sendRedirect("index.jsp");
             }
-
-        } catch (Exception e) {
-            out.print(e);
+        } 
+        catch (Exception e) {
+            out.print(e);   
         }
     }
 

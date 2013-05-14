@@ -19,6 +19,7 @@ public class Question {
     private int point;
     private String idcategories;
     private String filename;
+    private String username;
 
     public Question(String title, String content, String idusername, String isanswered, String dateposted, String duedate, String idcategories) {
         this.title = title;
@@ -78,4 +79,11 @@ public class Question {
         return this.filename;
     }
     
+    public void setUsername(String username){
+        this.username = username;
+    }
+    
+    public String getUsername(){
+        return this.username;
+    }
 }

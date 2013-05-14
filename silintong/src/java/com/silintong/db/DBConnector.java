@@ -5,9 +5,12 @@
 package com.silintong.db;
 
 import com.silintong.model.User;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.jsp.JspWriter;
 
 /**
  *
@@ -44,7 +47,7 @@ public class DBConnector {
     }
     
     public ResultSet getLatestQuestions() throws SQLException{
-        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven FROM QUESTION q,CATEGORY c WHERE q.idcategory=c.idcategory ORDER BY dateposted DESC LIMIT 0 , 10";
+        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser ORDER BY dateposted DESC LIMIT 0 , 10";
          Statement statement = dbConnection.createStatement();
          ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
@@ -71,14 +74,40 @@ public class DBConnector {
         return resultSet;
     }
     
-    public ResultSet getMyQuestions(String username) throws SQLException{
-        String query1 ="SELECT iduser FROM user WHERE username='"+username+"'";
+    public User searchUsername(String username) throws SQLException{
+        String query = "select * from user where username ='" + username + "' ";
         Statement statement = dbConnection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query1); 
-        //String idusername = resultSet.getObject(1).toString();
-        //String query = "SELECT * FROM QUESTION q,CATEGORY c WHERE q.idcategory=c.idcategory AND q.idusername = '"+idusername+"'ORDER BY dateposted DESC LIMIT 0 , 15";
-        //statement = dbConnection.createStatement();
-        //resultSet = statement.executeQuery(query); 
+        ResultSet rs = statement.executeQuery(query); 
+        User user;
+        while (rs.next()) {
+            
+           String id = rs.getObject(1)+"";
+           String uname = rs.getObject(2)+"";
+           String pass=rs.getObject(3)+"";
+           String fname= rs.getObject(4)+"";
+           String lname= rs.getObject(5)+"";
+           String bday= rs.getObject(6)+"";
+           String sex=rs.getObject(7)+"";
+           int poin=Integer.parseInt(rs.getObject(8)+"");
+           String fotouser=rs.getObject(9)+"";
+           String email=rs.getObject(10).toString();
+           return new User(fname, lname, pass, email, username, bday, sex, poin, fotouser);
+            
+        }
+        
+        return null;
+    }
+    public ResultSet getMyQuestions(String username) throws SQLException{
+        String query ="SELECT iduser FROM user WHERE username='"+username+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);                                          
+        String idusername = null;
+        while(resultSet.next()){
+            idusername = resultSet.getObject(1).toString();
+        }
+        String query2 = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idusername = '"+idusername+"'ORDER BY dateposted DESC LIMIT 0 , 15";
+        statement = dbConnection.createStatement();
+        resultSet = statement.executeQuery(query2); 
         return resultSet;
     }
 }
