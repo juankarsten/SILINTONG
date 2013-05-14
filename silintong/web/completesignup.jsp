@@ -26,84 +26,137 @@
                     
                 }
             }
+            
         %>
+        
         <div class="row">
-		<div class="large-9 columns">
+		<div class="small-9 columns">
 			<h2>SiLINTONG</h2>
 			<p>Sistem Informasi Saling Tolong</p>
 
 		</div>
+            <hr/>
 	</div>
         <div class="row">
-            <h1>Complete Your Profile</h1>
+            <div class="small-9 columns">
             <form action="SignUpCompleted" method="post" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="large-4 columns large-offset-2">
-                        First Name: <input type="text" name="firstname" placeholder="first name" />
-
-                        <%
+                <div class="small-12 columns ">
+                    <div class="small-4 columns">
+                        First Name:
+                    </div>
+                    <div class="small-8 columns left">
+                             <input type="text"  id="right-label" placeholder="First name" name="firstname"  />
+                            <%
                             if((geterror&1)!=0){
                                 out.print("complete First Name");
+                            }
+                            %>
+                    </div>
+                </div>
+                  
+                <div class="small-12 columns">
+                    <div class="small-4 columns">
+                        Last Name:
+                    </div>
+                    <div class="small-8 columns">
+                             <input type="text"  id="right-label" placeholder="Last name" name="lastname"  />
+                             <%
+                                if((geterror&16)!=0){
+                                    out.print("complete Last Name");
+                                }
+                            %>
+                    </div>
+                </div>
+                   
+                <div class="small-12 columns">
+                    <div class="small-4 columns">
+                        User Name:
+                    </div>
+                    <div class="small-8 columns">    
+                        
+                             <input type="text"  id="right-label" placeholder="User name" name="username"  />
+                             <%
+                                if((geterror&16)!=0){
+                                    out.print("complete User Name");
+                                }
+                            %>
+                    </div>
+                </div>
+                        
+                    
+                <div class="small-12 columns">
+                    <div class="small-4 columns">
+                        Password:
+                    </div>
+                    <div class="small-8 columns">    
+                        <input type="password" name="pass" placeholder="password" />
+                        <%
+                            if((geterror&4)!=0){
+                                out.print("complete Password");
                             }
                         %>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="large-4 columns large-offset-2">
-                        Last Name: <input type="text" name="lastname" placeholder="last name" />
+                    
+                <div class="small-12 columns">
+                    <div class="small-4 columns">
+                        Retype Password:
+                    </div>
+                    <div class="small-8 columns">    
+                        <input type="password" name="pass2" placeholder="retype password" />
+                        <%
+                            if((geterror&8)!=0){
+                                out.print("please retype password again");
+                            }
+                        %>
                     </div>
                 </div>
-                <div>
-                    Username: <input type="text" name="username"  placeholder="username" />
-                    <%
-                        if((geterror&16)!=0){
-                            out.print("complete User Name");
-                        }
-                    %>
+                    
+                <div class="small-12 columns">
+                    <div class="small-4 columns">
+                        Email:
+                    </div>
+                    <div class="small-8 columns">    
+                        <input type="email" name="email" placeholder="email" />
+                        <%
+                            if((geterror&2)!=0){
+                                out.print("complete your email");
+                            }
+                        %>
+                    </div>
                 </div>
-                <div>
-                    Password: <input type="password" name="pass" placeholder="password" />
-                    <%
-                        if((geterror&4)!=0){
-                            out.print("complete Password");
-                        }
-                    %>
-                </div>
-                <div>
-                    Retype Password: <input type="password" name="pass2" placeholder="retype password" />
-                    <%
-                        if((geterror&8)!=0){
-                            out.print("please retype password again");
-                        }
-                    %>
-                </div>
-                <div>
-                    Email: <input type="email" name="email" placeholder="email" />
-                    <%
-                        if((geterror&2)!=0){
-                            out.print("complete your email");
-                        }
-                    %>
-                </div>
-                <div>
-                    <div>
+                  
+                <div class="small-12 columns">
+                    <div class="small-4 columns">
                         Sex:
                     </div>
-                    <div>
-                        <input type="radio" name="sex" value="male" checked/>Male
-                        <input type="radio" name="sex" value="female"/>Female
+                    <div class="small-8 columns">    
+                        <div class="small-4  columns">
+                             <input type="radio" name="sex" value="male" checked/>Male
+                        </div>
+                        <div class="small-4 columns">
+                             <input type="radio" name="sex" value="female"/>Female
+                        </div>
                     </div>
                 </div>
-                <div>
-                    Birthday: 
-                    <select name="datebday">
+                    
+                    
+                <div class="small-12 columns">
+                    <div class="small-4 columns">
+                        Birthday:
+                    </div>
+                    <div class="small-8 columns">
+                    <div class="small-3 columns small-offset-1">
+                        <select name="datebday" >
                         <%
                             for (int ii=1; ii<=31;ii++){
                                 out.print("<option>"+ii+"</option>");
                             }
                         %>
                     </select>
-                    <select name="monthbday">
+                    </div>
+                    <div class="small-3 columns small-offset-1">
+                    <select name="monthbday" >
                         <%
                             String[] months={
                                 "January","February","March","April","May","June",
@@ -114,22 +167,28 @@
                             }
                         %>
                     </select>
-                    <select name="yearbday">
+                    </div>
+                    <div class="small-3 columns small-offset-1">
+                    <select name="yearbday" >
                         <%
                             for (int ii=1900; ii<=2013;ii++){
                                 out.print("<option>"+ii+"</option>");
                             }
                         %>
                     </select>
+                    </div>
+                    </div>
                 </div>
+                    
                     <div>
                         <div><h4>Choose Photo</h4></div>
                         <div><input type="file" name="foto" /></div>
                     </div>
                 <div>
-                    <input type="submit" value="sign up"/>
+                    <input class="button" type="submit" value="sign up"/>
                 </div>
             </form>
+            </div>
         </div>            
  <script>
   document.write('<script src=' +

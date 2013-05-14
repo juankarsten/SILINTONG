@@ -68,7 +68,7 @@
                         </fieldset>
                         <div class="large-4 columns">
                             <h3>Sign up here to start helping others</h3>
-                            <a href=""><button>Sign Up</button></a>
+                            <a href="completesignup.jsp"><button>Sign Up</button></a>
                         </div>
                     </div>
                 </div>

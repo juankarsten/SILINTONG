@@ -155,6 +155,8 @@
                                 out.print("<td>");
                                 out.print("<br>");                                 
                                 out.print("<form action='QuestionDetail' method ='post'>");
+                                out.print("<input type='hidden' name='idpertanyaan' value='"+listOfQst.get(cnt).getIdQuestion()+"'>");
+                                out.print("<input type='hidden' name='konten' value='"+listOfQst.get(cnt).getContent()+"'>");
                                 out.print("<input type='hidden' name='namakategori' value='"+listOfQst.get(cnt).getIdcategories()+"'>");
                                 out.print("<input type='hidden' name='userposter' value='"+listOfQst.get(cnt).getUsername()+"'>");
                                 out.print("<input type='hidden' name='qtitle' value='"+listOfQst.get(cnt).getTitle()+"'>");

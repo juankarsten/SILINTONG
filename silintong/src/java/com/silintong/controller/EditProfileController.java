@@ -4,6 +4,9 @@
  */
 package com.silintong.controller;
 
+import com.silintong.db.DBConnector;
+import com.silintong.extra.Validator;
+import com.silintong.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -35,15 +38,29 @@ public class EditProfileController extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditProfileController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditProfileController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String username=request.getParameter("username");
+            String id=request.getParameter("id");
+            String poin=request.getParameter("poin");
+            String fname=request.getParameter("fname");
+            String lname=request.getParameter("lname");
+            String pass=request.getParameter("pass");
+            String bday=request.getParameter("bday");
+            String sex=request.getParameter("sex");
+            String foto=request.getParameter("foto");
+            String email=request.getParameter("email");
+            String foto2=request.getParameter("foto2");
+            
+            String photo;
+            if(!Validator.isExist(foto)){
+                photo=foto2;
+            }else{
+                photo=foto;
+            }
+            User user=new User(fname, lname, pass, email, username, bday, sex, Integer.parseInt(poin), foto, id);
+            out.println(user.toString());
+            DBConnector dBConnector=new DBConnector();
+            dBConnector.updateUser(user,out);
+            response.sendRedirect("home.jsp");
         } finally {            
             out.close();
         }

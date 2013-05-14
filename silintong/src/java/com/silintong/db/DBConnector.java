@@ -123,10 +123,42 @@ public class DBConnector {
         statement.execute(query2); 
     }
     
+
     public ResultSet getEducationCategory() throws SQLException{
         String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '1' ORDER BY dateposted DESC LIMIT 0 , 10";
          Statement statement = dbConnection.createStatement();
          ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
+    }
+    public ResultSet getAnswer(String idquestion) throws SQLException{
+        String query ="SELECT * FROM answer as an join user as u on an.idusername = u.iduser WHERE idquestion='"+idquestion+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        return resultSet;
+    }
+    
+    public void updateUser(User user,PrintWriter out) {
+//        String query = "INSERT INTO user(password,firstname,lastname,bithday,sex,fotouser,email) values("+user.getPass()
+//                +","+user.getFName()+","+user.getLname()+","+user.getBday()+","+user.getSex()+","+user.
+//                +")";
+        String updateTableSQL = "UPDATE user SET password = ? ,firstname = ? ,lastname = ? , birthday = ? ,"
+                + " sex = ?, fotouser = ?, email = ?  WHERE iduser = ?";
+        PreparedStatement statement;
+        try {
+            statement = dbConnection.prepareStatement(updateTableSQL);
+
+            statement.setString(1, user.getPass());
+            statement.setString(2, user.getFName());
+            statement.setString(3, user.getLname());
+            statement.setString(4, user.getBday());
+            statement.setString(5, user.getSex());
+            statement.setString(6, user.getFoto());
+            statement.setString(7, user.getEmail());
+            statement.setString(8, user.getId());
+            statement.executeUpdate();
+         } catch (SQLException ex) {
+            out.print(ex);
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
