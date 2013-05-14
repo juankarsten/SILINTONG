@@ -123,6 +123,13 @@ public class DBConnector {
         statement.execute(query2); 
     }
     
+
+    public ResultSet getEducationCategory() throws SQLException{
+        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '1' ORDER BY dateposted DESC LIMIT 0 , 10";
+         Statement statement = dbConnection.createStatement();
+         ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
     public ResultSet getAnswer(String idquestion) throws SQLException{
         String query ="SELECT * FROM answer as an join user as u on an.idusername = u.iduser WHERE idquestion='"+idquestion+"'";
         Statement statement = dbConnection.createStatement();
@@ -153,5 +160,17 @@ public class DBConnector {
             out.print(ex);
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public ResultSet getEntertainmentCategory() throws SQLException{
+        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '2' ORDER BY dateposted DESC LIMIT 0 , 10";
+         Statement statement = dbConnection.createStatement();
+         ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    public ResultSet getGeneralCategory() throws SQLException{
+        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '3' ORDER BY dateposted DESC LIMIT 0 , 10";
+         Statement statement = dbConnection.createStatement();
+         ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
     }
 }

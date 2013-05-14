@@ -4,6 +4,8 @@
     Author     : GG
 --%>
 
+<%@page import="com.silintong.model.Question"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Enumeration"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -56,11 +58,21 @@
                     <!-- Left Nav Section -->
                     <ul class="left">
                         <li class="divider"></li>
-                        <li class="active"><a href="#">Latest Questions</a></li>
+                        <li><a href="latestQuestions">Latest Questions</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">My Questions</a></li>
+                        <li>
+                      <form id="form1" action="myquestions" method="post">
+                          <li><a href="javascript:;" onclick="document.getElementById('form1').submit();">My Questions</a></li>
+                          <input type="hidden" name="username" value="<% out.print(username); %>"/>
+                      </form>
+                  </li>  
                         <li class="divider"></li>
-                        <li><a href="#">All Categories</a></li>
+                        <li class="has-dropdown"><a href="#">All Categories</a>
+                  <ul class="dropdown">
+                      <li><a href="EducationCategory">Education</a>
+                      <li><a href="EntertainmentCategory">Entertainment</a>
+                      <li><a href="GeneralCategory">General</a>
+                  </ul>
                         <li class="divider"></li>
                     </ul>
                     <ul class="right">
@@ -82,6 +94,84 @@
             <div class="small-9 columns">
                 <legend><h3>Kategori Edukasi</h3></legend>
                 <hr/>
+                 <%
+               ArrayList<Question> listOfQst = (ArrayList<Question>)request.getAttribute("latestQuestion");
+               if(listOfQst != null){
+                   if(!listOfQst.isEmpty()){
+                    out.print("<table>");
+                    out.print("<thead>");
+                        out.print("<tr>");
+                            out.print("<td>");
+                            out.print("Category");
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print("Username");
+                            out.print("</td>");
+                            out.print("<td width='290'>");
+                            out.print("Title");
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print("Posted");
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print("Duedate");
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print("Points");
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print("Action");
+                            out.print("</td>");
+                        out.print("</tr>");    
+                    out.print("</thead>");
+                    
+                    out.print("<tbody>");
+                        for(int cnt=0;cnt<listOfQst.size();cnt++){
+                            out.print("<tr>");
+                                out.print("<td>");  
+                                out.print(listOfQst.get(cnt).getIdcategories());
+                                out.print("</td>");
+                                out.print("<td>");  
+                                out.print(listOfQst.get(cnt).getUsername());
+                                out.print("</td>");
+                                out.print("<td>");  
+                                out.print(listOfQst.get(cnt).getTitle());
+                                out.print("</td>");
+                                out.print("<td>");  
+                                out.print(listOfQst.get(cnt).getDateposted());
+                                out.print("</td>");
+                                out.print("<td>");  
+                                out.print(listOfQst.get(cnt).getDuedate());
+                                out.print("</td>");
+                                out.print("<td>");  
+                                out.print(listOfQst.get(cnt).getPoint());
+                                out.print("</td>");
+                                out.print("<td>");
+                                out.print("<br>");                                 
+                                out.print("<form action='QuestionDetail' method ='post'>");
+                                 out.print("<input type='hidden' name='idpertanyaan' value='"+listOfQst.get(cnt).getIdQuestion()+"'>");
+                                out.print("<input type='hidden' name='konten' value='"+listOfQst.get(cnt).getContent()+"'>");
+                                out.print("<input type='hidden' name='namakategori' value='"+listOfQst.get(cnt).getIdcategories()+"'>");
+                                out.print("<input type='hidden' name='userposter' value='"+listOfQst.get(cnt).getUsername()+"'>");
+                                out.print("<input type='hidden' name='qtitle' value='"+listOfQst.get(cnt).getTitle()+"'>");
+                                out.print("<input type='hidden' name='duedate' value='"+listOfQst.get(cnt).getDuedate()+"'>");
+                                out.print("<input type='hidden' name='poin' value='"+listOfQst.get(cnt).getPoint()+"'>");
+                                out.print("<input type='hidden' name='username' value='"+username+"'>");
+                                out.print("<input class='small button' type='submit' value='Details'>");
+                                out.print("<input type='hidden' name='username' value='"+username+"'/>");
+                                out.print("</form>");
+                                out.print("</td>");
+                            out.print("</tr>");
+                        } 
+                    out.print("</tbody>");
+                out.print("</table>");
+               }
+                 
+           }else if(listOfQst == null){
+                   out.print("No Questions Posted yet.");
+                }
+
+            %>
             </div>
             <div class="large-3 columns">
                 <h5>Post A New Question</h5>
