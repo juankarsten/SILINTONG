@@ -81,7 +81,7 @@
                          </div>
 
                          <div class="small-5 columns">
-                             <input type="password"  id="right-label" placeholder="Password" name="lname" value=<%= user.getLname() %> />
+                             <input type="text"  id="right-label" placeholder="Password" name="lname" value="<%= user.getLname() %>" />
                         </div>
                       </div>
                    </div>

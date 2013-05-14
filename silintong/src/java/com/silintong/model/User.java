@@ -185,4 +185,11 @@ public class User {
         dBConnector.closeConnection();
         return hasil;
     }
+
+    @Override
+    public String toString() {
+        return  fname+ lname+ pass+ email+ username+ bday+sex+ point+ foto;
+    }
+    
+    
 }

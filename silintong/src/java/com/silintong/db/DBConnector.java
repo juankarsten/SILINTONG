@@ -122,4 +122,29 @@ public class DBConnector {
         statement = dbConnection.createStatement();
         statement.execute(query2); 
     }
+    
+    public void updateUser(User user,PrintWriter out) {
+//        String query = "INSERT INTO user(password,firstname,lastname,bithday,sex,fotouser,email) values("+user.getPass()
+//                +","+user.getFName()+","+user.getLname()+","+user.getBday()+","+user.getSex()+","+user.
+//                +")";
+        String updateTableSQL = "UPDATE user SET password = ? ,firstname = ? ,lastname = ? , birthday = ? ,"
+                + " sex = ?, fotouser = ?, email = ?  WHERE iduser = ?";
+        PreparedStatement statement;
+        try {
+            statement = dbConnection.prepareStatement(updateTableSQL);
+
+            statement.setString(1, user.getPass());
+            statement.setString(2, user.getFName());
+            statement.setString(3, user.getLname());
+            statement.setString(4, user.getBday());
+            statement.setString(5, user.getSex());
+            statement.setString(6, user.getFoto());
+            statement.setString(7, user.getEmail());
+            statement.setString(8, user.getId());
+            statement.executeUpdate();
+         } catch (SQLException ex) {
+            out.print(ex);
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
