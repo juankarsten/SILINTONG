@@ -67,7 +67,21 @@ public class DBConnector {
         }
         String query2 = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idusername = '"+idusername+"'ORDER BY dateposted DESC LIMIT 0 , 15";
         statement = dbConnection.createStatement();
+        
         resultSet = statement.executeQuery(query2); 
         return resultSet;
+    }
+    
+    public void insertAnswer(String content, String username, String idQuestion, String dateposted, String filename) throws SQLException{
+        String query ="SELECT iduser FROM user WHERE username='"+username+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);                                          
+        String idusername = null;
+        while(resultSet.next()){
+            idusername = resultSet.getObject(1).toString();
+        }
+        String query2="INSERT INTO answer (content,idusername,idquestion,isapproved,dateposted,filename) VALUES ('"+content+"','"+idusername+"','"+idQuestion+"','0','"+dateposted+"','"+filename+"')";
+        statement = dbConnection.createStatement();
+        statement.execute(query2); 
     }
 }

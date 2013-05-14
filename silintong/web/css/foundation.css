@@ -73,8 +73,14 @@ img {
   vertical-align: middle; }
 
 textarea {
+    
   height: auto;
   min-height: 50px; }
+
+textarea[name=answercontent] {
+    resize: none;
+    height: 300px;
+}
 
 select {
   width: 100%; }

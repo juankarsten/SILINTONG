@@ -4,6 +4,9 @@
     Author     : GG
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.silintong.model.Question"%>
@@ -65,7 +68,7 @@
                 <ul class="left">
                   <li class="divider"></li>
                   
-                  <li class="active"><a href="#">Latest Questions</a></li>
+                  <li><a href="latestQuestions">Latest Questions</a></li>
                   <li class="divider"></li>
                   <li>
                       <form id="form1" action="myquestions" method="post">
@@ -94,77 +97,29 @@
             </nav>
 
             <div class="small-9 columns">
-            <%
-               ArrayList<Question> listOfQst = (ArrayList<Question>)request.getAttribute("latestQuestion");
-               if(listOfQst != null){
-                   if(!listOfQst.isEmpty()){
-                    out.print("<table>");
-                    out.print("<thead>");
-                        out.print("<tr>");
-                            out.print("<td>");
-                            out.print("Category");
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print("Username");
-                            out.print("</td>");
-                            out.print("<td width='290'>");
-                            out.print("Title");
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print("Posted");
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print("Duedate");
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print("Points");
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print("Action");
-                            out.print("</td>");
-                        out.print("</tr>");    
-                    out.print("</thead>");
-                    
-                    out.print("<tbody>");
-                        for(int cnt=0;cnt<listOfQst.size();cnt++){
-                            out.print("<tr>");
-                                out.print("<td>");  
-                                out.print(listOfQst.get(cnt).getIdcategories());
-                                out.print("</td>");
-                                out.print("<td>");  
-                                out.print(listOfQst.get(cnt).getUsername());
-                                out.print("</td>");
-                                out.print("<td>");  
-                                out.print(listOfQst.get(cnt).getTitle());
-                                out.print("</td>");
-                                out.print("<td>");  
-                                out.print(listOfQst.get(cnt).getDateposted());
-                                out.print("</td>");
-                                out.print("<td>");  
-                                out.print(listOfQst.get(cnt).getDuedate());
-                                out.print("</td>");
-                                out.print("<td>");  
-                                out.print(listOfQst.get(cnt).getPoint());
-                                out.print("</td>");
-                                out.print("<td>");
-                                out.print("<br>");                                 
-                                out.print("<form>");
-                                out.print("<input class='small button' type='submit' value='Details'>");
-                                out.print("<input type='hidden' name='username' value='"+username+"'/>");
-                                out.print("</form>");
-                                out.print("</td>");
-                            out.print("</tr>");
-                        } 
-                    out.print("</tbody>");
-                out.print("</table>");
-               }
-                 
-           }else if(listOfQst == null){
-                   out.print("No Questions Posted yet.");
-                }
-
-            %>
-         
+                <h2>Post An Answer</h2>
+                <hr/>
+                    <label>Question Title :</label><br/>
+                    <%
+                        String title = "judul pertanyaan";
+                        out.print(title);
+                    %>
+                   <br/><br/>
+                   <form action="PostAnswerController">
+                    <label for="answercontent">Answer :</label><br/>
+                    <textarea id="answercontent" placeholder="Write your answer here." name="answercontent"/></textarea>
+                    <label for="filetambahan">Upload File(Optional) :</label>
+                        <br/>
+                        <input type="file" id="filetambahan" placeholder="Upload File" name="filename"/>
+                        <%DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                        Date theDate = new java.util.Date();
+                        String formattedDate = df.format(theDate);
+                        %>
+                        <input type="hidden" value='<% out.print(formattedDate);%>' name="dateposted"/>
+                        <input type ='submit' value ='Post Answer' class='button right'/>
+                        <input type ='hidden' name='username' value ='<% out.print(username);%>'/>
+                        <input type ='hidden' name='idquestion' value ='<% out.print(4);%>'/>
+                   </form>
             </div>
             
 		<div class="large-3 columns">
