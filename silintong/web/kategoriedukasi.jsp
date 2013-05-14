@@ -58,11 +58,21 @@
                     <!-- Left Nav Section -->
                     <ul class="left">
                         <li class="divider"></li>
-                        <li class="active"><a href="#">Latest Questions</a></li>
+                        <li><a href="latestQuestions">Latest Questions</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">My Questions</a></li>
+                        <li>
+                      <form id="form1" action="myquestions" method="post">
+                          <li><a href="javascript:;" onclick="document.getElementById('form1').submit();">My Questions</a></li>
+                          <input type="hidden" name="username" value="<% out.print(username); %>"/>
+                      </form>
+                  </li>  
                         <li class="divider"></li>
-                        <li><a href="#">All Categories</a></li>
+                        <li class="has-dropdown"><a href="#">All Categories</a>
+                  <ul class="dropdown">
+                      <li><a href="EducationCategory">Education</a>
+                      <li><a href="EntertainmentCategory">Entertainment</a>
+                      <li><a href="GeneralCategory">General</a>
+                  </ul>
                         <li class="divider"></li>
                     </ul>
                     <ul class="right">
@@ -139,6 +149,8 @@
                                 out.print("<td>");
                                 out.print("<br>");                                 
                                 out.print("<form action='QuestionDetail' method ='post'>");
+                                 out.print("<input type='hidden' name='idpertanyaan' value='"+listOfQst.get(cnt).getIdQuestion()+"'>");
+                                out.print("<input type='hidden' name='konten' value='"+listOfQst.get(cnt).getContent()+"'>");
                                 out.print("<input type='hidden' name='namakategori' value='"+listOfQst.get(cnt).getIdcategories()+"'>");
                                 out.print("<input type='hidden' name='userposter' value='"+listOfQst.get(cnt).getUsername()+"'>");
                                 out.print("<input type='hidden' name='qtitle' value='"+listOfQst.get(cnt).getTitle()+"'>");

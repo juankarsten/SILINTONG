@@ -161,4 +161,16 @@ public class DBConnector {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public ResultSet getEntertainmentCategory() throws SQLException{
+        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '2' ORDER BY dateposted DESC LIMIT 0 , 10";
+         Statement statement = dbConnection.createStatement();
+         ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    public ResultSet getGeneralCategory() throws SQLException{
+        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '3' ORDER BY dateposted DESC LIMIT 0 , 10";
+         Statement statement = dbConnection.createStatement();
+         ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
 }
