@@ -5,9 +5,12 @@
 package com.silintong.db;
 
 import com.silintong.model.User;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.jsp.JspWriter;
 
 /**
  *
@@ -27,9 +30,7 @@ public class DBConnector {
         }
         
     }
-    
-    
-    
+
     public Connection getConnection(){
         return dbConnection;
     }
@@ -57,6 +58,43 @@ public class DBConnector {
         return resultSet;
     }
     
+    public ResultSet getIdKategori(String namakategori) throws SQLException {
+        String query = "SELECT idcategory from category where namecategory='"+namakategori+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    
+    public ResultSet getIdUsername(String username) throws SQLException {
+        String query = "SELECT iduser from user where username='"+username+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    
+    public User searchUsername(String username) throws SQLException{
+        String query = "select * from user where username ='" + username + "' ";
+        Statement statement = dbConnection.createStatement();
+        ResultSet rs = statement.executeQuery(query); 
+        User user;
+        while (rs.next()) {
+            
+           String id = rs.getObject(1)+"";
+           String uname = rs.getObject(2)+"";
+           String pass=rs.getObject(3)+"";
+           String fname= rs.getObject(4)+"";
+           String lname= rs.getObject(5)+"";
+           String bday= rs.getObject(6)+"";
+           String sex=rs.getObject(7)+"";
+           int poin=Integer.parseInt(rs.getObject(8)+"");
+           String fotouser=rs.getObject(9)+"";
+
+           String email=rs.getObject(10)+"";
+           return new User(fname, lname, pass, email, username, bday, sex, poin, fotouser,id);
+            
+        }
+        return null;
+    }
     public ResultSet getMyQuestions(String username) throws SQLException{
         String query ="SELECT iduser FROM user WHERE username='"+username+"'";
         Statement statement = dbConnection.createStatement();
