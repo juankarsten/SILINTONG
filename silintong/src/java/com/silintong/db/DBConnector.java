@@ -56,4 +56,20 @@ public class DBConnector {
         ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
     }
+    
+    public ResultSet getIdKategori(String namakategori) throws SQLException {
+        String query = "SELECT idcategory from category where namecategory='"+namakategori+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    
+    public ResultSet getIdUsername(String username) throws SQLException {
+        String query = "SELECT iduser from user where username='"+username+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    
+    
 }
