@@ -8,15 +8,11 @@ import com.silintong.db.DBConnector;
 import com.silintong.model.Question;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author GG
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
+@WebServlet(name = "LoginController", urlPatterns = {"/home"})
 public class LoginController extends HttpServlet {
 
     /**
@@ -47,9 +43,8 @@ public class LoginController extends HttpServlet {
             String password = request.getParameter("katasandi");
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             PrintWriter out = response.getWriter();
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/silintong", "root", "toor");
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from user where username ='" + username + "' and password='" + password + "'");
+            DBConnector db = new DBConnector();
+            ResultSet rs = db.login(username, password);
             int count = 0;
             while (rs.next()) {
                     count++;
@@ -58,21 +53,19 @@ public class LoginController extends HttpServlet {
             if (count > 0) {
                     HttpSession session = request.getSession( true );
                     session.setAttribute(username, username);
-                    DBConnector db = new DBConnector();
                     ResultSet resultSet = db.getLatestQuestions();
 
                     ArrayList<Question> listOfQuestions = new ArrayList<Question>();
 
-                    while (resultSet.next()) {
-
+                   while (resultSet.next()) {
                         String idQuestion = ""+resultSet.getObject(1);
-                        String idCategory = ""+resultSet.getObject(2);
+                        String nameCategory = ""+resultSet.getObject(2);
                         String title = ""+resultSet.getObject(3);
                         String content = ""+resultSet.getObject(4);
                         String dateposted = ""+resultSet.getObject(5);
                         String duedate = ""+resultSet.getObject(6);
-
-                        Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,0,idCategory,null);
+                        String point = ""+resultSet.getObject(7);
+                        Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,Integer.parseInt(point),nameCategory,null);
                         listOfQuestions.add(qst);
                     }
 

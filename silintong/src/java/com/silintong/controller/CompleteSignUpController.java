@@ -4,6 +4,7 @@
  */
 package com.silintong.controller;
 
+import com.silintong.extra.Validator;
 import com.silintong.model.User;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -74,6 +75,7 @@ public class CompleteSignUpController extends HttpServlet {
         String lname=getFieldItem(items,"lastname");
         String email=getFieldItem(items,"email");
         String pass=getFieldItem(items,"pass");
+        String pass2=getFieldItem(items,"pass2");
         String username=getFieldItem(items,"username");
         String sex=getFieldItem(items,"sex");
         String datebday=getFieldItem(items,"datebday");
@@ -91,38 +93,53 @@ public class CompleteSignUpController extends HttpServlet {
                 
             }
         }
-        String randomFotoFile=UUID.randomUUID().toString();
-        randomFotoFile+=UUID.randomUUID().toString();
-        randomFotoFile=randomFotoFile.substring(0,(randomFotoFile.length()>40)?40:randomFotoFile.length())+".png";
-        out.print(randomFotoFile.length());
-        User user=new User(fname, lname, pass, email, username, yearbday+"-"+monthbday+"-"+datebday, sex, 500, randomFotoFile);
-        FileOutputStream outputStream=null;
-        try {
-            File file=new File(randomFotoFile);
-            outputStream=new FileOutputStream(file);
-            int read = 0;
-            if (!file.exists()) {
-		file.createNewFile();
+        String randomFotoFile=null;
+        
+        
+        //VALIDATION
+        int error=0;
+        if(!Validator.isExist(fname))error=1;
+        if(!Validator.isExist(email))error+=2;
+        if(!Validator.isExist(pass))error+=4;
+        if(!Validator.isExist(pass2)||(Validator.isExist(pass2)&&!pass.equals(pass2)))error+=8;
+        if(!Validator.isExist(username))error+=16;
+        
+        
+        if(Validator.isExist(foto)){
+            randomFotoFile=UUID.randomUUID().toString();
+            randomFotoFile+=UUID.randomUUID().toString();
+            randomFotoFile=randomFotoFile.substring(0,(randomFotoFile.length()>40)?40:randomFotoFile.length())+".png";
+            out.print(randomFotoFile.length());
+            
+            FileOutputStream outputStream=null;
+            try {
+                File file=new File(randomFotoFile);
+                outputStream=new FileOutputStream(file);
+                int read = 0;
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                byte[] bytes = new byte[1024];	
+                while ((read = filecontent.read(bytes)) != -1) {
+                            outputStream.write(bytes, 0, read);
+                }
+                outputStream.close();
+                filecontent.close();
+            } catch (FileNotFoundException ex) {
+                out.print(ex);
+                Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                out.print(ex);
+                Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            byte[] bytes = new byte[1024];	
-            while ((read = filecontent.read(bytes)) != -1) {
-                    	outputStream.write(bytes, 0, read);
-            }
-            outputStream.close();
-            filecontent.close();
-        } catch (FileNotFoundException ex) {
-            out.print(ex);
-            Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            out.print(ex);
-            Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        out.print(user.insertUser(out));
+        User user=new User(fname, lname, pass, email, username, yearbday+"-"+monthbday+"-"+datebday, sex, 500, randomFotoFile);
+        if(error==0)out.print(user.insertUser(out));
         
         
         try {
-            response.sendRedirect("index.jsp");
+            if(error==0)response.sendRedirect("index.jsp");
+            else response.sendRedirect("completesignup.jsp?error="+error);
         } catch (IOException ex) {
             out.print(ex);
             Logger.getLogger(CompleteSignUpController.class.getName()).log(Level.SEVERE, null, ex);

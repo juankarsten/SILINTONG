@@ -43,10 +43,10 @@ public class NewQuestionController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /*HttpSession session = request.getSession( true );
-            Enumeration usersession = session.getAttributeNames();
-            String username = usersession.nextElement().toString();*/
-            String username = "Johny";
+            
+            
+            //String username = "Johny";
+            String username = request.getParameter("username");
             String judul=request.getParameter("judul");
             String isi=request.getParameter("isipertanyaan");
             String deadline=request.getParameter("deadline");
@@ -59,8 +59,7 @@ public class NewQuestionController extends HttpServlet {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/silintong", "root", "toor");
             Statement st = con.createStatement();
             ResultSet idkat = st.executeQuery("SELECT idcategory from category where namecategory='"+kategori+"'");
-            out.println(idkat);   
-            String idkategori = idkat.getObject(0).toString();         
+            String idkategori = idkat.getString("idcategory");
             out.println(idkategori); 
             Boolean checkIQ;
             checkIQ = st.execute("INSERT INTO Question values ("+judul+","+isi+","+username+","+0+","+tanggalhariini+","+deadline+","+poin+","+idkategori+","+filetambahan+","+")");

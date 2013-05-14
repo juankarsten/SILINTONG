@@ -4,8 +4,15 @@
     Author     : GG
 --%>
 
+<%@page import="java.util.Enumeration"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+            Enumeration usersession = session.getAttributeNames();
+            if(usersession == null) {
+                response.sendRedirect("index.jsp");
+            }
+%>
 <html>
     <head>
         <link rel="stylesheet" href="css/foundation.css" />
@@ -31,8 +38,18 @@
         </script>
          <div class="row">
             <div class='large-12 columns'>
-                <h1>SILINGTONG</h1>
-                <p id="subname">Sistem Informasi Saling Tolong</p>
+                <div class="large-9 columns">
+                    <h2>SILINTONG</h2>
+                    <p id="subname">Sistem Informasi Saling Tolong</p>
+		</div>
+                <div class="large-3 columns">
+                    <h3>Hello, 
+                   <%
+                        String username = usersession.nextElement().toString(); 
+                        out.print(username);
+                    %>!</h3>
+                    <p>Edit Profile</p>	
+		</div>
                 <hr />
             </div>
          </div>
@@ -69,6 +86,7 @@
                         <br/>
                         <input type="file" id="filetambahan" placeholder="Upload File" name="filetambahan"/>
                         <input type ='submit' value ='Buat Pertanyaan' class='button'/>
+                        <input type ='hidden' name='username' value ='<% out.print(username);%>'/>
                     </form>
                     </div>
             </div>
