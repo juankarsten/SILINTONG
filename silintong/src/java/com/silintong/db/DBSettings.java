@@ -10,6 +10,6 @@ package com.silintong.db;
  */
 public class DBSettings {
     public static String USER="root";
-    public static String PASSWORD="toor";
+    public static String PASSWORD="";
     public static String URL="jdbc:mysql://localhost/silintong";
 }

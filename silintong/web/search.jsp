@@ -4,6 +4,7 @@
     Author     : GG
 --%>
 
+<%@page import="com.silintong.db.DBConnector"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.silintong.model.Question"%>
@@ -21,6 +22,7 @@
             if(usersession == null) {
                 response.sendRedirect("index.jsp");
             }
+            String search=request.getParameter("search");
 %>
 <head>
 	<meta charset="utf-8" />
@@ -49,7 +51,7 @@
                         String username = usersession.nextElement().toString(); 
                         out.print(username);
                     %>!</h3>
-                    <p>Edit Profile</p>	
+                    <p><a href="editprofile.jsp" class="button">Edit Profile</p></a>	
                     <a href="Logout" class='alert button tiny round right'>
                         Logout
                     </a>
@@ -65,9 +67,14 @@
                 <ul class="left">
                   <li class="divider"></li>
                   
-                  <li><a href="latestQuestions">Latest Questions</a></li>
+                  <li><a href="#">Latest Questions</a></li>
                   <li class="divider"></li>
-                  <li class="active" ><a href="#">My Questions</a></li>
+                  <li>
+                      <form id="form1" action="myquestions" method="post">
+                          <li><a href="javascript:;" onclick="document.getElementById('form1').submit();">My Questions</a></li>
+                          <input type="hidden" name="username" value="<% out.print(username); %>"/>
+                      </form>
+                  </li>  
                   <li class="divider"></li>
                   <li><a href="#">All Categories</a></li>
                   <li class="divider"></li>
@@ -90,7 +97,7 @@
 
             <div class="small-9 columns">
             <%
-               ArrayList<Question> listOfQst = (ArrayList<Question>)request.getAttribute("myQuestions");
+               ArrayList<Question> listOfQst = (ArrayList<Question>)new DBConnector().searchQuestion(search);
                if(listOfQst != null){
                    if(!listOfQst.isEmpty()){
                     out.print("<table>");
@@ -98,6 +105,9 @@
                         out.print("<tr>");
                             out.print("<td>");
                             out.print("Category");
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print("Username");
                             out.print("</td>");
                             out.print("<td width='290'>");
                             out.print("Title");
@@ -124,6 +134,9 @@
                                 out.print(listOfQst.get(cnt).getIdcategories());
                                 out.print("</td>");
                                 out.print("<td>");  
+                                out.print("Nono");
+                                out.print("</td>");
+                                out.print("<td>");  
                                 out.print(listOfQst.get(cnt).getTitle());
                                 out.print("</td>");
                                 out.print("<td>");  
@@ -137,8 +150,17 @@
                                 out.print("</td>");
                                 out.print("<td>");
                                 out.print("<br>");                                 
-                                out.print("<form>");
+                                out.print("<form action='QuestionDetail' method ='post'>");
+                                out.print("<input type='hidden' name='idpertanyaan' value='"+listOfQst.get(cnt).getIdQuestion()+"'>");
+                                out.print("<input type='hidden' name='konten' value='"+listOfQst.get(cnt).getContent()+"'>");
+                                out.print("<input type='hidden' name='namakategori' value='"+listOfQst.get(cnt).getIdcategories()+"'>");
+                                out.print("<input type='hidden' name='userposter' value='"+listOfQst.get(cnt).getUsername()+"'>");
+                                out.print("<input type='hidden' name='qtitle' value='"+listOfQst.get(cnt).getTitle()+"'>");
+                                out.print("<input type='hidden' name='duedate' value='"+listOfQst.get(cnt).getDuedate()+"'>");
+                                out.print("<input type='hidden' name='poin' value='"+listOfQst.get(cnt).getPoint()+"'>");
+                                out.print("<input type='hidden' name='username' value='"+username+"'>");
                                 out.print("<input class='small button' type='submit' value='Details'>");
+                                out.print("<input type='hidden' name='username' value='"+username+"'/>");
                                 out.print("</form>");
                                 out.print("</td>");
                             out.print("</tr>");
@@ -161,12 +183,9 @@
                         <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
 			<h4>Leaderboards</h4>
                         <jsp:include page="leaderboard.jsp" />
-			<p>Once you've exhausted the fun in this document, you should check out:</p>
-			<ul class="disc">
-				<li><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</li>
-				<li><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</li>
-				<li><a href="http://twitter.com/foundationzurb">@foundationzurb</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</li>
-			</ul>
+                        <h4>Beli Poin</h4>
+                        <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
+                        <img src="img/paybro.png" alt='paybro'>
 		</div>
 	</div>
 

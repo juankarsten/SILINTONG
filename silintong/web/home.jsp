@@ -79,16 +79,17 @@
                 </ul>
                 <ul class="right">
                         <li class="has-form">
-                    <form>
+                    <form action="search.jsp" method="get">
                       <div class="row collapse">
                         <div class="small-8 columns">
-                          <input type="text">
+                          <input type="text" name="search">
                         </div>
                         <div class="small-4 columns">
-                          <a href="#" class="alert button">Search</a>
+                            <input type="submit" class="alert button" value="search">
                         </div>
                       </div>
                     </form>
+                            
                 </ul>
               </section>
             </nav>
@@ -180,6 +181,7 @@
                         <br/>
                         <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
 			<h4>Leaderboards</h4>
+                        <jsp:include page="leaderboard.jsp" />
                         <h4>Beli Poin</h4>
                         <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
                         <img src="img/paybro.png" alt='paybro'>
