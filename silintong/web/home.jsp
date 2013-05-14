@@ -148,7 +148,7 @@
                                 out.print("</td>");
                                 out.print("<td>");
                                 out.print("<br>");                                 
-                                out.print("<form action='questiondetail.jsp' method ='post'>");
+                                out.print("<form action='QuestionDetail' method ='post'>");
                                 out.print("<input type='hidden' name='namakategori' value='"+listOfQst.get(cnt).getIdcategories()+"'>");
                                 out.print("<input type='hidden' name='userposter' value='"+listOfQst.get(cnt).getUsername()+"'>");
                                 out.print("<input type='hidden' name='qtitle' value='"+listOfQst.get(cnt).getTitle()+"'>");

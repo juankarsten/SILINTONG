@@ -6,6 +6,8 @@ package com.silintong.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +37,19 @@ public class QuestionDetail extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String namakategori = request.getParameter("namakategori");
-            String poster = request.getParameter("");
+            String poster = request.getParameter("userposter");
+            String judul =request.getParameter("qtitle");
+            String deadline = request.getParameter("duedate");
+            String poin =request.getParameter("poin");
+            ArrayList<String> QuestionDetail = new ArrayList<String>();
+            QuestionDetail.add(judul);
+            QuestionDetail.add(poster);
+            QuestionDetail.add(deadline);
+            QuestionDetail.add(namakategori);
+            QuestionDetail.add(poin);
+            request.setAttribute("questiondetail", QuestionDetail);
+            RequestDispatcher view = request.getRequestDispatcher("questiondetail.jsp");
+            view.forward(request, response);
         } 
         catch(Exception e) {            
             out.print(e);

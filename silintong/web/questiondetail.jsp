@@ -4,6 +4,7 @@
     Author     : GG
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Enumeration"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -52,6 +53,22 @@
         <div class="row">
             <div class="small-9 columns">
                 <legend><h3>Detail Pertanyaan:</h3></legend>
+                <%
+                    ArrayList<String> QuestionDetail = (ArrayList<String>)request.getAttribute("questiondetail");
+                        out.println("<label>Judul Pertanyaan: </label>" +QuestionDetail.get(0));
+                        out.print("<br/>");
+                        out.print("<br/>");
+                        out.println("<label>Yang Bertanya: </label>"+QuestionDetail.get(1));
+                        out.print("<br/>");
+                        out.print("<br/>");
+                        out.println("<label>Deadline: </label>"+QuestionDetail.get(2));
+                        out.print("<br/>");
+                        out.print("<br/>");
+                        out.println("<label>Kategori: </label>"+QuestionDetail.get(3));
+                        out.print("<br/>");
+                        out.print("<br/>");
+                        out.println("<label>Poin: </label>"+QuestionDetail.get(4));
+                %>
                 <hr/>
             </div>
             <div class="large-3 columns">
