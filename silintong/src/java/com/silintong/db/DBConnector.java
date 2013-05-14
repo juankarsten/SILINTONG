@@ -30,9 +30,7 @@ public class DBConnector {
         }
         
     }
-    
-    
-    
+
     public Connection getConnection(){
         return dbConnection;
     }
@@ -91,10 +89,8 @@ public class DBConnector {
            int poin=Integer.parseInt(rs.getObject(8)+"");
            String fotouser=rs.getObject(9)+"";
            String email=rs.getObject(10).toString();
-           return new User(fname, lname, pass, email, username, bday, sex, poin, fotouser);
-            
+           return new User(fname, lname, pass, email, username, bday, sex, poin, fotouser);   
         }
-        
         return null;
     }
     public ResultSet getMyQuestions(String username) throws SQLException{
