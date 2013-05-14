@@ -89,6 +89,10 @@ select {
     margin:auto;
 }
 
+#approveans {
+    float:right;
+}
+
 /* Grid HTML Classes */
 .row {
   background-color:#FFFFFF;

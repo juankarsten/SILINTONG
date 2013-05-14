@@ -158,7 +158,6 @@
                                 out.print("<input type='hidden' name='poin' value='"+listOfQst.get(cnt).getPoint()+"'>");
                                 out.print("<input type='hidden' name='username' value='"+username+"'>");
                                 out.print("<input class='small button' type='submit' value='Details'>");
-                                out.print("<input type='hidden' name='username' value='"+username+"'/>");
                                 out.print("</form>");
                                 out.print("</td>");
                             out.print("</tr>");
