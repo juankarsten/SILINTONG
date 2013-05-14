@@ -23,8 +23,6 @@
     </head>
     <body>
         <script>
-
- 
             $(function() {
                 $( "#datepicker" ).datepicker({
                     dateFormat : 'yy/mm/dd',
@@ -48,7 +46,7 @@
                         String username = usersession.nextElement().toString(); 
                         out.print(username);
                     %>!</h3>
-                    <p>Edit Profile</p>	
+                    <p><a href="editprofile.jsp" class="button">Edit Profile</a></p>	
 		</div>
                 <hr />
             </div>

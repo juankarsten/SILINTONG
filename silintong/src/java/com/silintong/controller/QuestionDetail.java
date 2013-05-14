@@ -4,11 +4,8 @@
  */
 package com.silintong.controller;
 
-import com.silintong.db.DBConnector;
-import com.silintong.model.Question;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,14 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author GG
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/home"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "QuestionDetail", urlPatterns = {"/QuestionDetail"})
+public class QuestionDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -40,48 +36,23 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String username = request.getParameter("namauser");
-            String password = request.getParameter("katasandi");
-            DBConnector db = new DBConnector();
-            ResultSet rs = db.login(username, password);
-            out.print(rs);
-            int count = 0;
-            while (rs.next()) {
-                count++;
-            }
-            rs.first();
-            
-            if (count > 0) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute(username, username);
-                ResultSet resultSet = db.getLatestQuestions();
-
-                ArrayList<Question> listOfQuestions = new ArrayList<Question>();
-
-                   while (resultSet.next()) {
-                        String idQuestion = ""+resultSet.getObject(1);
-                        String nameCategory = ""+resultSet.getObject(2);
-                        String title = ""+resultSet.getObject(3);
-                        String content = ""+resultSet.getObject(4);
-                        String dateposted = ""+resultSet.getObject(5);
-                        String duedate = ""+resultSet.getObject(6);
-                        String point = ""+resultSet.getObject(7);
-                        String user = ""+resultSet.getObject(8);
-                        
-                        Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,Integer.parseInt(point),nameCategory,null);
-                        qst.setUsername(user);
-                        listOfQuestions.add(qst);
-                    }
-                request.setAttribute("latestQuestion", listOfQuestions);
-                RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-                view.forward(request, response);
-            } 
-            else {
-                response.sendRedirect("index.jsp");
-            }
+            String namakategori = request.getParameter("namakategori");
+            String poster = request.getParameter("userposter");
+            String judul =request.getParameter("qtitle");
+            String deadline = request.getParameter("duedate");
+            String poin =request.getParameter("poin");
+            ArrayList<String> QuestionDetail = new ArrayList<String>();
+            QuestionDetail.add(judul);
+            QuestionDetail.add(poster);
+            QuestionDetail.add(deadline);
+            QuestionDetail.add(namakategori);
+            QuestionDetail.add(poin);
+            request.setAttribute("questiondetail", QuestionDetail);
+            RequestDispatcher view = request.getRequestDispatcher("questiondetail.jsp");
+            view.forward(request, response);
         } 
-        catch (Exception e) {
-            out.print(e);   
+        catch(Exception e) {            
+            out.print(e);
         }
     }
 
@@ -98,6 +69,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
