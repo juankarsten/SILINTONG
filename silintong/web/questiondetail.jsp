@@ -9,12 +9,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<%
-            Enumeration usersession = session.getAttributeNames();
-            if(usersession == null) {
-                response.sendRedirect("index.jsp");
-            }
-%>
+    <%
+                Enumeration usersession = session.getAttributeNames();
+                if(usersession == null) {
+                    response.sendRedirect("index.jsp");
+                }
+    %>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
@@ -53,23 +53,47 @@
         <div class="row">
             <div class="small-9 columns">
                 <legend><h3>Detail Pertanyaan:</h3></legend>
+                <hr/>
                 <%
-                    ArrayList<String> QuestionDetail = (ArrayList<String>)request.getAttribute("questiondetail");
+                    ArrayList<String> QuestionDetail = (ArrayList<String>)request.getAttribute("questiondetail");                  
                         out.println("<label>Judul Pertanyaan: </label>" +QuestionDetail.get(0));
                         out.print("<br/>");
                         out.print("<br/>");
                         out.println("<label>Yang Bertanya: </label>"+QuestionDetail.get(1));
                         out.print("<br/>");
                         out.print("<br/>");
-                        out.println("<label>Deadline: </label>"+QuestionDetail.get(2));
+                        out.println("<label>Isi Pertanyaan: </label>"+QuestionDetail.get(2));
                         out.print("<br/>");
                         out.print("<br/>");
-                        out.println("<label>Kategori: </label>"+QuestionDetail.get(3));
+                        out.println("<label>Deadline: </label>"+QuestionDetail.get(3));
                         out.print("<br/>");
                         out.print("<br/>");
-                        out.println("<label>Poin: </label>"+QuestionDetail.get(4));
+                        out.println("<label>Kategori: </label>"+QuestionDetail.get(4));
+                        out.print("<br/>");
+                        out.print("<br/>");
+                        out.print("<label>Poin: </label>"+QuestionDetail.get(5));
                 %>
                 <hr/>
+                <%
+                    ArrayList<String> answers = (ArrayList<String>)request.getAttribute("answers");
+                    out.print(answers);
+                    if(answers != null){
+                        if(!answers.isEmpty()){
+                             for(int cnt=0;cnt<answers.size();cnt++){
+                                 out.print("<div class='row'>");
+                                 out.print("<div class='large-3 columns'>");
+                                 out.print("<h4>"+answers.get(3)+"</h4>");
+                                 out.print("</div>");
+                                 out.print("</div>");
+                                 out.print("<div class='large-9 columns'>");
+                                 out.print("<p>"+answers.get(2)+"</p>");
+                                 out.print("</div>");
+                                 out.print("</div>");
+                             }
+                         }
+                    }
+                   
+                %>
             </div>
             <div class="large-3 columns">
                 <h5>Post A New Question</h5>

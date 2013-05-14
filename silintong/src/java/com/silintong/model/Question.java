@@ -86,4 +86,8 @@ public class Question {
     public String getUsername(){
         return this.username;
     }
+    
+    public String getIdQuestion(){
+        return this.id;
+    }
 }
