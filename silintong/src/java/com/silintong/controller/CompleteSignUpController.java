@@ -113,7 +113,6 @@ public class CompleteSignUpController extends HttpServlet {
             out.print(randomFotoFile);
             
             
-            
             FileOutputStream outputStream=null;
             try {
                 File file=new File(randomFotoFile);

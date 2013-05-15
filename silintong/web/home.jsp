@@ -49,7 +49,7 @@
                         String username = usersession.nextElement().toString(); 
                         out.print(username);
                     %>!</h3>
-                    <p><a href="editprofile.jsp" class="button">Edit Profile</p></a>	
+                    <p><a href="editprofile.jsp" class="button">Edit Profile</a></p>	
                     <a href="Logout" class='alert button tiny round right'>
                         Logout
                     </a>
@@ -182,6 +182,8 @@
                         <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
 			<h4>Leaderboards</h4>
                         <jsp:include page="leaderboard.jsp" />
+                        <h4>Transfer Poin</h4>
+                        <a href="transfer.jsp" class="button small">Transfer</a>
                         <h4>Beli Poin</h4>
                         <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
                         <img src="img/paybro.png" alt='paybro'>

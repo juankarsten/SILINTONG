@@ -162,7 +162,7 @@
 
                          <div class="small-5 columns">
                                  <% if(Validator.isExist(user.getFoto())){%>
-                                   <img src=<%= user.getFoto() %> />
+                                 <img src="user.getFoto()" />
                                 <%}%>
                                 <input type="file" name="foto" />
 

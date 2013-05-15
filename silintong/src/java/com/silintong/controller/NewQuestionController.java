@@ -60,7 +60,7 @@ public class NewQuestionController extends HttpServlet {
             String tanggalhariini= dateFormat.format(date).toString();
             DBConnector db = new DBConnector();
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/silintong", "root", "toor");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/silintong", "root", "");
             Statement st = con.createStatement();
             ResultSet idkat = db.getIdKategori(kategori);
             ResultSet idusername = db.getIdUsername(username);
