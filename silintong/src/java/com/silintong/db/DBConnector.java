@@ -4,10 +4,13 @@
  */
 package com.silintong.db;
 
+import com.silintong.model.Question;
 import com.silintong.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.jsp.JspWriter;
@@ -161,6 +164,50 @@ public class DBConnector {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+<<<<<<< HEAD
+    
+    public ResultSet getLeaderBoard(){
+        String query="select * from user order by poin";
+        Statement statement;
+        try {
+            statement = dbConnection.createStatement();
+            ResultSet rs=statement.executeQuery(query);
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+           
+    }
+    
+    
+    public List<Question> searchQuestion(String search) {
+        List<Question> list=new ArrayList<Question>();
+        String query = "select * from question where title like '%"+search+"%' or content like '%"+search+"%'";
+        Statement statement;
+        try {
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(query); 
+            User user;
+            while (rs.next()) {
+                String[] str=new String[11];
+                for(int ii=0;ii<10;ii++){
+                    str[ii]=rs.getObject(ii+1)+"";
+                }
+
+               Question q;
+                q = new Question(str[0],str[1],str[2],str[3],str[4],str[5],str[6],Integer.parseInt(str[7]),str[8],str[9]);
+                list.add(q);
+            }
+        } catch (SQLException ex) {
+            
+            
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;
+=======
     public ResultSet getEntertainmentCategory() throws SQLException{
         String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '2' ORDER BY dateposted DESC LIMIT 0 , 10";
          Statement statement = dbConnection.createStatement();
@@ -179,5 +226,6 @@ public class DBConnector {
         PreparedStatement statement;
         statement = dbConnection.prepareStatement(updateTableSQL);
         statement.executeUpdate();
+>>>>>>> 2b9374cc40f1fab1bfb334e01c42359ef3358d4d
     }
 }

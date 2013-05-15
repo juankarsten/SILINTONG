@@ -4,6 +4,7 @@
     Author     : GG
 --%>
 
+<%@page import="com.silintong.db.DBConnector"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.silintong.model.Question"%>
@@ -21,6 +22,7 @@
             if(usersession == null) {
                 response.sendRedirect("index.jsp");
             }
+            String search=request.getParameter("search");
 %>
 <head>
 	<meta charset="utf-8" />
@@ -49,7 +51,7 @@
                         String username = usersession.nextElement().toString(); 
                         out.print(username);
                     %>!</h3>
-                    <p><a href="editprofile.jsp" class="button">Edit Profile</a></p>	
+                    <p><a href="editprofile.jsp" class="button">Edit Profile</p></a>	
                     <a href="Logout" class='alert button tiny round right'>
                         Logout
                     </a>
@@ -65,7 +67,7 @@
                 <ul class="left">
                   <li class="divider"></li>
                   
-                  <li class="active"><a href="#">Latest Questions</a></li>
+                  <li><a href="#">Latest Questions</a></li>
                   <li class="divider"></li>
                   <li>
                       <form id="form1" action="myquestions" method="post">
@@ -74,13 +76,7 @@
                       </form>
                   </li>  
                   <li class="divider"></li>
-                  <li class="has-dropdown"><a href="#">All Categories</a>
-                  <ul class="dropdown">
-                      <li><a href="EducationCategory">Education</a>
-                      <li><a href="EntertainmentCategory">Entertainment</a>
-                      <li><a href="GeneralCategory">General</a>
-                  </ul>
-
+                  <li><a href="#">All Categories</a></li>
                   <li class="divider"></li>
                 </ul>
                 <ul class="right">
@@ -95,14 +91,13 @@
                         </div>
                       </div>
                     </form>
-                            
                 </ul>
               </section>
             </nav>
 
             <div class="small-9 columns">
             <%
-               ArrayList<Question> listOfQst = (ArrayList<Question>)request.getAttribute("latestQuestion");
+               ArrayList<Question> listOfQst = (ArrayList<Question>)new DBConnector().searchQuestion(search);
                if(listOfQst != null){
                    if(!listOfQst.isEmpty()){
                     out.print("<table>");
@@ -139,7 +134,7 @@
                                 out.print(listOfQst.get(cnt).getIdcategories());
                                 out.print("</td>");
                                 out.print("<td>");  
-                                out.print(listOfQst.get(cnt).getUsername());
+                                out.print("Nono");
                                 out.print("</td>");
                                 out.print("<td>");  
                                 out.print(listOfQst.get(cnt).getTitle());
@@ -165,6 +160,7 @@
                                 out.print("<input type='hidden' name='poin' value='"+listOfQst.get(cnt).getPoint()+"'>");
                                 out.print("<input type='hidden' name='username' value='"+username+"'>");
                                 out.print("<input class='small button' type='submit' value='Details'>");
+                                out.print("<input type='hidden' name='username' value='"+username+"'/>");
                                 out.print("</form>");
                                 out.print("</td>");
                             out.print("</tr>");
@@ -187,8 +183,6 @@
                         <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
 			<h4>Leaderboards</h4>
                         <jsp:include page="leaderboard.jsp" />
-                        <h4>Transfer Poin</h4>
-                        <a href="transfer.jsp" class="button small">Transfer</a>
                         <h4>Beli Poin</h4>
                         <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
                         <img src="img/paybro.png" alt='paybro'>

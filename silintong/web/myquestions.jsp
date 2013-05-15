@@ -49,7 +49,7 @@
                         String username = usersession.nextElement().toString(); 
                         out.print(username);
                     %>!</h3>
-                    <p>Edit Profile</p>	
+                    <p><a href="editprofile.jsp" class="button">Edit Profile</a></p>
                     <a href="Logout" class='alert button tiny round right'>
                         Logout
                     </a>
@@ -74,13 +74,13 @@
                 </ul>
                 <ul class="right">
                         <li class="has-form">
-                    <form>
+                    <form action="search.jsp" method="get">
                       <div class="row collapse">
                         <div class="small-8 columns">
-                          <input type="text">
+                          <input type="text" name="search">
                         </div>
                         <div class="small-4 columns">
-                          <a href="#" class="alert button">Search</a>
+                            <input type="submit" class="alert button" value="search">
                         </div>
                       </div>
                     </form>
@@ -169,6 +169,7 @@
                         <br/>
                         <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
 			<h4>Leaderboards</h4>
+                        <jsp:include page="leaderboard.jsp" />
 			<p>Once you've exhausted the fun in this document, you should check out:</p>
 			<ul class="disc">
 				<li><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</li>

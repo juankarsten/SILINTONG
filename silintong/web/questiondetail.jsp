@@ -4,6 +4,7 @@
     Author     : GG
 --%>
 
+<%@page import="com.silintong.model.Rating"%>
 <%@page import="com.silintong.model.Answer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Enumeration"%>
@@ -87,6 +88,49 @@
             </div>
         </div>
         <%
+<<<<<<< HEAD
+                    ArrayList<Answer> answers = (ArrayList<Answer>)request.getAttribute("answers");
+                    if(answers != null){
+                        if(!answers.isEmpty()){
+                             for(int cnt=0;cnt<answers.size();cnt++){
+                                 out.print("<div class='row'>");
+                                 out.print("<div class='large-3 columns'>");
+                                 out.print("<h4>");
+                                 out.print(answers.get(cnt).getIdusername());
+                                 out.print("</h4>");
+                                 out.print("</div>");
+                                 out.print("<div class='large-7 columns'>");
+                                 out.print(answers.get(cnt).getContent());
+                                 
+                                 out.print("</div>");
+                                 out.print("<div class='large-2 columns'>");
+                                 
+                                 boolean ratenow[]=new boolean[5];
+//                                 int rate=Integer.parseInt() -1;
+                                 String temp=Rating.getRate(answers.get(cnt).getIdusername(), answers.get(cnt).getIdanswer());
+//                                 out.print(temp+"aa"+answers.get(cnt).getIdusername());
+//                                 out.print(rate);
+                                 %>
+                                 <form action="rate.jsp">
+                                     <select name="rate"  >
+                                         <option >1</option>
+                                         <option >2</option>
+                                         <option >3</option>
+                                         <option >4</option>
+                                         <option >5</option>
+                                     </select>
+                                     <input type="hidden" name="ans" value="<%=answers.get(cnt).getIdanswer() %>" />
+                                     <input type="hidden" name="user" value="<%=answers.get(cnt).getIdusername() %>" />
+                                     <input type="submit" value="rate" class="button small"/>
+                                 </form>
+                                 <%
+                                 
+                                 out.print("</div>");
+                                 out.print("<hr/>");
+                                 out.print("</div>");                            
+                             }
+                         }
+=======
             ArrayList<Answer> answers = (ArrayList<Answer>) request.getAttribute("answers");
             if (answers != null) {
                 if (!answers.isEmpty()) {
@@ -109,6 +153,7 @@
                         out.print("<hr/>");
                         out.print("</div>");
                         out.print("</div>");
+>>>>>>> 2b9374cc40f1fab1bfb334e01c42359ef3358d4d
                     }
                 }
             }
