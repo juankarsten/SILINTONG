@@ -100,10 +100,11 @@
                         out.print("<div class='large-9 columns'>");
                         out.print(answers.get(cnt).getContent());
                         if (username.equals(QuestionDetail.get(1))) {
-                            out.print("<a href='ApproveAnswer' id='approveans'>");
-                            out.print("<img src='img/checked.png'/>");
-                            out.print("Approve this answer");
-                            out.print("</a>");
+                            out.print("<form action='ApproveAnswer' method='post' id='approveans'>");
+                            out.print("<img src='img/checked.png' />");
+                            out.print("<input type='hidden' name='answerid' value='"+answers.get(cnt).getIdanswer() +"'>");                      
+                            out.print("<input type = 'submit' class='button' value ='Approve this answer'");
+                            out.print("</form>");
                         }
                         out.print("<hr/>");
                         out.print("</div>");
@@ -111,9 +112,6 @@
                     }
                 }
             }
-
-
-
         %>
 
         <div class='row'>

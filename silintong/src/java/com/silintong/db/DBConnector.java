@@ -173,4 +173,11 @@ public class DBConnector {
          ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
     }
+    
+    public void updateAnswer(String idanswer) throws SQLException{
+        String updateTableSQL ="update answer set isapproved = 1 where idanswer = '"+idanswer+"'";
+        PreparedStatement statement;
+        statement = dbConnection.prepareStatement(updateTableSQL);
+        statement.executeUpdate();
+    }
 }
