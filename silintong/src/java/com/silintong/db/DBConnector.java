@@ -164,8 +164,7 @@ public class DBConnector {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-<<<<<<< HEAD
-    
+
     public ResultSet getLeaderBoard(){
         String query="select * from user order by poin";
         Statement statement;
@@ -207,7 +206,7 @@ public class DBConnector {
         }
         
         return list;
-=======
+    }
     public ResultSet getEntertainmentCategory() throws SQLException{
         String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '2' ORDER BY dateposted DESC LIMIT 0 , 10";
          Statement statement = dbConnection.createStatement();
@@ -226,6 +225,5 @@ public class DBConnector {
         PreparedStatement statement;
         statement = dbConnection.prepareStatement(updateTableSQL);
         statement.executeUpdate();
->>>>>>> 2b9374cc40f1fab1bfb334e01c42359ef3358d4d
     }
 }

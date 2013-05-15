@@ -88,7 +88,6 @@
             </div>
         </div>
         <%
-<<<<<<< HEAD
                     ArrayList<Answer> answers = (ArrayList<Answer>)request.getAttribute("answers");
                     if(answers != null){
                         if(!answers.isEmpty()){
@@ -130,32 +129,7 @@
                                  out.print("</div>");                            
                              }
                          }
-=======
-            ArrayList<Answer> answers = (ArrayList<Answer>) request.getAttribute("answers");
-            if (answers != null) {
-                if (!answers.isEmpty()) {
-                    for (int cnt = 0; cnt < answers.size(); cnt++) {
-                        out.print("<div class='row'>");
-                        out.print("<div class='large-3 columns'>");
-                        out.print("<h4>");
-                        out.print(answers.get(cnt).getIdusername());
-                        out.print("</h4>");
-                        out.print("</div>");
-                        out.print("<div class='large-9 columns'>");
-                        out.print(answers.get(cnt).getContent());
-                        if (username.equals(QuestionDetail.get(1))) {
-                            out.print("<form action='ApproveAnswer' method='post' id='approveans'>");
-                            out.print("<img src='img/checked.png' />");
-                            out.print("<input type='hidden' name='answerid' value='"+answers.get(cnt).getIdanswer() +"'>");                      
-                            out.print("<input type = 'submit' class='button' value ='Approve this answer'");
-                            out.print("</form>");
-                        }
-                        out.print("<hr/>");
-                        out.print("</div>");
-                        out.print("</div>");
->>>>>>> 2b9374cc40f1fab1bfb334e01c42359ef3358d4d
-                    }
-                }
+
             }
         %>
 
