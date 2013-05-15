@@ -74,7 +74,13 @@
                       </form>
                   </li>  
                   <li class="divider"></li>
-                  <li><a href="#">All Categories</a></li>
+                  <li class="has-dropdown"><a href="#">All Categories</a>
+                  <ul class="dropdown">
+                      <li><a href="EducationCategory">Education</a>
+                      <li><a href="EntertainmentCategory">Entertainment</a>
+                      <li><a href="GeneralCategory">General</a>
+                  </ul>
+
                   <li class="divider"></li>
                 </ul>
                 <ul class="right">
@@ -159,7 +165,6 @@
                                 out.print("<input type='hidden' name='poin' value='"+listOfQst.get(cnt).getPoint()+"'>");
                                 out.print("<input type='hidden' name='username' value='"+username+"'>");
                                 out.print("<input class='small button' type='submit' value='Details'>");
-                                out.print("<input type='hidden' name='username' value='"+username+"'/>");
                                 out.print("</form>");
                                 out.print("</td>");
                             out.print("</tr>");

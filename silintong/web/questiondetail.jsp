@@ -12,10 +12,10 @@
 <!DOCTYPE html>
 <html>
     <%
-                Enumeration usersession = session.getAttributeNames();
-                if(usersession == null) {
-                    response.sendRedirect("index.jsp");
-                }
+        Enumeration usersession = session.getAttributeNames();
+        if (usersession == null) {
+            response.sendRedirect("index.jsp");
+        }
     %>
     <head>
         <meta charset="utf-8" />
@@ -57,26 +57,26 @@
                 <legend><h3>Detail Pertanyaan:</h3></legend>
                 <hr/>
                 <%
-                    ArrayList<String> QuestionDetail = (ArrayList<String>)request.getAttribute("questiondetail");                  
-                        out.println("<label>Judul Pertanyaan: </label>" +QuestionDetail.get(0));
-                        out.print("<br/>");
-                        out.print("<br/>");
-                        out.println("<label>Yang Bertanya: </label>"+QuestionDetail.get(1));
-                        out.print("<br/>");
-                        out.print("<br/>");
-                        out.println("<label>Isi Pertanyaan: </label>"+QuestionDetail.get(2));
-                        out.print("<br/>");
-                        out.print("<br/>");
-                        out.println("<label>Deadline: </label>"+QuestionDetail.get(3));
-                        out.print("<br/>");
-                        out.print("<br/>");
-                        out.println("<label>Kategori: </label>"+QuestionDetail.get(4));
-                        out.print("<br/>");
-                        out.print("<br/>");
-                        out.print("<label>Poin: </label>"+QuestionDetail.get(5));
+                    ArrayList<String> QuestionDetail = (ArrayList<String>) request.getAttribute("questiondetail");
+                    out.println("<label>Judul Pertanyaan: </label>" + QuestionDetail.get(0));
+                    out.print("<br/>");
+                    out.print("<br/>");
+                    out.println("<label>Yang Bertanya: </label>" + QuestionDetail.get(1));
+                    out.print("<br/>");
+                    out.print("<br/>");
+                    out.println("<label>Isi Pertanyaan: </label>" + QuestionDetail.get(2));
+                    out.print("<br/>");
+                    out.print("<br/>");
+                    out.println("<label>Deadline: </label>" + QuestionDetail.get(3));
+                    out.print("<br/>");
+                    out.print("<br/>");
+                    out.println("<label>Kategori: </label>" + QuestionDetail.get(4));
+                    out.print("<br/>");
+                    out.print("<br/>");
+                    out.print("<label>Poin: </label>" + QuestionDetail.get(5));
                 %>
                 <hr/>
-                
+
             </div>
             <div class="large-3 columns">
                 <h5>Post A New Question</h5>
@@ -88,6 +88,7 @@
             </div>
         </div>
         <%
+<<<<<<< HEAD
                     ArrayList<Answer> answers = (ArrayList<Answer>)request.getAttribute("answers");
                     if(answers != null){
                         if(!answers.isEmpty()){
@@ -129,20 +130,45 @@
                                  out.print("</div>");                            
                              }
                          }
+=======
+            ArrayList<Answer> answers = (ArrayList<Answer>) request.getAttribute("answers");
+            if (answers != null) {
+                if (!answers.isEmpty()) {
+                    for (int cnt = 0; cnt < answers.size(); cnt++) {
+                        out.print("<div class='row'>");
+                        out.print("<div class='large-3 columns'>");
+                        out.print("<h4>");
+                        out.print(answers.get(cnt).getIdusername());
+                        out.print("</h4>");
+                        out.print("</div>");
+                        out.print("<div class='large-9 columns'>");
+                        out.print(answers.get(cnt).getContent());
+                        if (username.equals(QuestionDetail.get(1))) {
+                            out.print("<form action='ApproveAnswer' method='post' id='approveans'>");
+                            out.print("<img src='img/checked.png' />");
+                            out.print("<input type='hidden' name='answerid' value='"+answers.get(cnt).getIdanswer() +"'>");                      
+                            out.print("<input type = 'submit' class='button' value ='Approve this answer'");
+                            out.print("</form>");
+                        }
+                        out.print("<hr/>");
+                        out.print("</div>");
+                        out.print("</div>");
+>>>>>>> 2b9374cc40f1fab1bfb334e01c42359ef3358d4d
                     }
-                   
-                %>
-                
-                <div class='row'>
-                    <form method="post" action='PostAnswer'>
-                        <input type='hidden' value='<% out.print(QuestionDetail.get(6)); %>' name='idquestion'/>
-                        <input type='submit'class='button' value ='Answer this Post'>
-                    </form>
-                    </div>
-                    
+                }
+            }
+        %>
+
+        <div class='row'>
+            <form method="post" action='PostAnswer'>
+                <input type='hidden' value='<% out.print(QuestionDetail.get(6));%>' name='idquestion'/>
+                <input type='submit'class='button' value ='Answer this Post'>
+            </form>
+        </div>
+
         <script>
             document.write('<script src=' +
-                    ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+                    ('__proto__' in {} ? 'js/zepto' : 'js/jquery') +
                     '.js><\/script>')
         </script>
         <script src="js/foundation.min.js"></script>
