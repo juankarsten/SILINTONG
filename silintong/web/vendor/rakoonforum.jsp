@@ -1,25 +1,26 @@
 <%-- 
-    Document   : kategorihiburan
-    Created on : May 14, 2013, 8:13:53 PM
+    Document   : rakoonforum
+    Created on : May 17, 2013, 5:09:28 AM
     Author     : GG
 --%>
 
 <%@page import="com.silintong.model.Question"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Enumeration"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<%
-            Enumeration usersession = session.getAttributeNames();
-            if(usersession == null) {
-                response.sendRedirect("index.jsp");
-            }
-%>
+    <%
+        Enumeration usersession = session.getAttributeNames();
+        if (usersession == null) {
+            response.sendRedirect("index.jsp");
+        }
+    %>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>SiLINTONG : Sistem Informasi Saling Tolong</title>
+        <title>SILINTONG : Sistem Informasi Saling Tolong</title>
 
 
         <link rel="stylesheet" href="css/foundation.css" />
@@ -53,7 +54,7 @@
 
         <div class="row">
 
-            <nav class="top-bar">
+             <nav class="top-bar">
                 <section class="top-bar-section">
                     <!-- Left Nav Section -->
                     <ul class="left">
@@ -94,7 +95,7 @@
             </nav>
 
             <div class="small-9 columns">
-                <legend><h3>Kategori Hiburan</h3></legend>
+                <legend><h3>Forum Tanya Jawab Rakoon</h3><img src="img/rakoon.png" alt='paybro'></legend>
                 <hr/>
                 <%
                ArrayList<Question> listOfQst = (ArrayList<Question>)request.getAttribute("latestQuestion");
@@ -177,8 +178,12 @@
             </div>
             <div class="large-3 columns">
                 <h5>Post A New Question</h5>
+                <br/>
                 <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
                 <h4>Leaderboards</h4>
+                <jsp:include page="leaderboard.jsp" />
+                <h4>Transfer Poin</h4>
+                <a href="transfer.jsp" class="button small">Transfer</a>
                 <h4>Beli Poin</h4>
                 <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
                 <img src="img/paybro.png" alt='paybro'>

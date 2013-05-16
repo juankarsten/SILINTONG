@@ -13,7 +13,7 @@
     <head>
         <link rel="stylesheet" href="css/foundation.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SILINGTONG</title>
+        <title>SILINTONG</title>
 
     </head>
     <body>
@@ -57,11 +57,11 @@
                                     </li>
                                     <li>
                                         <img src="img/helphand.jpg">
-                                        <div class="orbit-caption">Helping others is fun!</div>
+                                        <div class="orbit-caption">Let's start helping others now!</div>
                                     </li>
                                     <li>
                                         <img src="img/morning.jpg">
-                                        <div class="orbit-caption">Let's Help Others Everyday!</div>
+                                        <div class="orbit-caption">Help yourself by helping others</div>
                                     </li>
                                 </ul>
                             </div>

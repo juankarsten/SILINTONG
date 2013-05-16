@@ -129,12 +129,12 @@
                         <br/>
                         <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
 			<h4>Leaderboards</h4>
-			<p>Once you've exhausted the fun in this document, you should check out:</p>
-			<ul class="disc">
-				<li><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</li>
-				<li><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</li>
-				<li><a href="http://twitter.com/foundationzurb">@foundationzurb</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</li>
-			</ul>
+                        <jsp:include page="leaderboard.jsp" />
+                        <h4>Transfer Poin</h4>
+                        <a href="transfer.jsp" class="button small">Transfer</a>
+                        <h4>Beli Poin</h4>
+                        <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
+                        <img src="img/paybro.png" alt='paybro'>
 		</div>
 	</div>
 

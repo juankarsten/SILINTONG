@@ -163,11 +163,9 @@ public class DBConnector {
             out.print(ex);
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-<<<<<<< HEAD
-    
+    }    
     public ResultSet getLeaderBoard(){
-        String query="select * from user order by poin";
+        String query="select * from user order by poin desc";
         Statement statement;
         try {
             statement = dbConnection.createStatement();
@@ -201,21 +199,33 @@ public class DBConnector {
                 list.add(q);
             }
         } catch (SQLException ex) {
-            
-            
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return list;
-=======
+    }
     public ResultSet getEntertainmentCategory() throws SQLException{
         String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '2' ORDER BY dateposted DESC LIMIT 0 , 10";
-         Statement statement = dbConnection.createStatement();
-         ResultSet resultSet = statement.executeQuery(query); 
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
     }
     public ResultSet getGeneralCategory() throws SQLException{
         String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '3' ORDER BY dateposted DESC LIMIT 0 , 10";
+         Statement statement = dbConnection.createStatement();
+         ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    
+    public ResultSet getPaybroCategory() throws SQLException{
+        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '4' ORDER BY dateposted DESC LIMIT 0 , 10";
+         Statement statement = dbConnection.createStatement();
+         ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    
+    public ResultSet getRakoonCategory() throws SQLException{
+        String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '5' ORDER BY dateposted DESC LIMIT 0 , 10";
          Statement statement = dbConnection.createStatement();
          ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
@@ -226,6 +236,74 @@ public class DBConnector {
         PreparedStatement statement;
         statement = dbConnection.prepareStatement(updateTableSQL);
         statement.executeUpdate();
->>>>>>> 2b9374cc40f1fab1bfb334e01c42359ef3358d4d
+    }
+    
+    public boolean insertQuestion(String judul, String isi,String iduser, int isfalse, String tanggalhariini, String deadline, String poin, String idkategori, String filetambahan) throws SQLException{
+        String query ="INSERT INTO Question (title,content,idusername,isanswered,dateposted,duedate,pointgiven,idcategory,filename) VALUES ('"+judul+"','"+isi+"','"+iduser+"','"+isfalse+"','"+tanggalhariini+"','"+deadline+"','"+poin+"','"+idkategori+"','"+filetambahan+"')";
+        Statement statement = dbConnection.createStatement();
+        Boolean resultSet = statement.execute(query);
+        return resultSet;
+    }
+    
+    public ResultSet getPoinUser(String username) throws SQLException {
+        String query = "SELECT poin from user where username='"+username+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    
+    public void cutPoint(String username, int poin) throws SQLException {
+        ResultSet rs = getIdUsername(username);
+        ResultSet ra = getPoinUser(username);
+        if (rs.next() && ra.next()){
+            String iduser =rs.getObject(1).toString();
+            int poinuser = Integer.parseInt(ra.getObject(1).toString());
+            String updateTableSQL ="update user set poin = ("+poinuser+"-"+poin+")where iduser = '"+iduser+"'";
+            PreparedStatement statement;
+            statement = dbConnection.prepareStatement(updateTableSQL);
+            statement.executeUpdate();        
+        }     
+    }
+    
+    public void addPoint(String username, int poin ) throws SQLException {
+        ResultSet rs = getIdUsername(username);
+        ResultSet ra = getPoinUser(username);
+        if (rs.next() && ra.next()){
+            String iduser =rs.getObject(1).toString();
+            int poinuser = Integer.parseInt(ra.getObject(1).toString());
+            String updateTableSQL ="update user set poin = ("+poinuser+"+"+poin+")where iduser = '"+iduser+"'";
+            PreparedStatement statement;
+            statement = dbConnection.prepareStatement(updateTableSQL);
+            statement.executeUpdate();        
+        }     
+    }
+    
+    public void doTransfer(String userasal, String usertujuan, int poin) throws SQLException{
+        cutPoint(userasal,poin);
+        addPoint(usertujuan,poin);
+    }
+    
+    public int getRating(String idanswer) throws SQLException {
+        String query = "select sum(rate) from rating where idanswer='"+idanswer+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
+        if (resultSet.next()) {
+            int rating = Integer.parseInt(resultSet.getObject(1).toString());
+            if (resultSet.getObject(1).toString() != null) {
+                return rating;
+            }
+            else return 0;
+        }
+        return 0;
+    }
+    
+    public boolean getAnswerRating(String idanswer) throws SQLException {
+        String query = "select * from rating where idanswer='"+idanswer+"'";
+        Statement statement = dbConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query); 
+        if (resultSet.next()) {
+            return true;
+        }
+        return false;
     }
 }
