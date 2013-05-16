@@ -164,6 +164,7 @@ public class DBConnector {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
+
     public ResultSet getLeaderBoard(){
         String query="select * from user order by poin desc";
         Statement statement;
