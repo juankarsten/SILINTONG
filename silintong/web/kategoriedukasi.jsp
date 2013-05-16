@@ -177,6 +177,7 @@
                 <h5>Post A New Question</h5>
                 <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
                 <h4>Leaderboards</h4>
+                <jsp:include page="leaderboard.jsp" />
                 <h4>Beli Poin</h4>
                 <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
                 <img src="img/paybro.png" alt='paybro'>

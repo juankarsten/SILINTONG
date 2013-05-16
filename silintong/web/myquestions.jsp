@@ -69,7 +69,12 @@
                   <li class="divider"></li>
                   <li class="active" ><a href="#">My Questions</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">All Categories</a></li>
+                  <li class="has-dropdown"><a href="#">All Categories</a>
+                  <ul class="dropdown">
+                      <li><a href="EducationCategory">Education</a>
+                      <li><a href="EntertainmentCategory">Entertainment</a>
+                      <li><a href="GeneralCategory">General</a>
+                  </ul>
                   <li class="divider"></li>
                 </ul>
                 <ul class="right">
@@ -170,12 +175,12 @@
                         <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
 			<h4>Leaderboards</h4>
                         <jsp:include page="leaderboard.jsp" />
-			<p>Once you've exhausted the fun in this document, you should check out:</p>
-			<ul class="disc">
-				<li><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</li>
-				<li><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</li>
-				<li><a href="http://twitter.com/foundationzurb">@foundationzurb</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</li>
-			</ul>
+                        <h4>Transfer Poin</h4>
+                        <a href="transfer.jsp" class="button small">Transfer</a>
+                        <h4>Beli Poin</h4>
+                        <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
+                        <img src="img/paybro.png" alt='paybro'>
+                        
 		</div>
 	</div>
 
