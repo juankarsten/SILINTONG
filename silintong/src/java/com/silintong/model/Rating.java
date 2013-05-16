@@ -121,7 +121,8 @@ public class Rating {
                 statement.setString(3, rating.getRate());
                 hasil=statement.executeUpdate();
                 statement.close();
-            }else{
+            }
+            else{
                 try {
                     out.print("more");
                 } catch (IOException ex) {
@@ -135,10 +136,12 @@ public class Rating {
                 statement.close();
             }
             
-            } catch (SQLException ex) {
+            } 
+            catch (SQLException ex) {
                 try {
                     out.print(ex);
-                } catch (IOException ex1) {
+                } 
+                catch (IOException ex1) {
                     Logger.getLogger(Rating.class.getName()).log(Level.SEVERE, null, ex1);
                 }
                 Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);

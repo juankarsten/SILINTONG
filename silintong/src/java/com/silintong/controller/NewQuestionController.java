@@ -59,15 +59,13 @@ public class NewQuestionController extends HttpServlet {
             Date date = new Date();
             String tanggalhariini= dateFormat.format(date).toString();
             DBConnector db = new DBConnector();
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/silintong", "law2013", "law2013");
-            Statement st = con.createStatement();
             ResultSet idkat = db.getIdKategori(kategori);
             ResultSet idusername = db.getIdUsername(username);
             while (idkat.next() && idusername.next()) {
                 String idkategori = idkat.getObject("idcategory").toString(); 
                 String iduser = idusername.getObject("iduser").toString();
-                Boolean checkIQ = st.execute("INSERT INTO Question (title,content,idusername,isanswered,dateposted,duedate,pointgiven,idcategory,filename) VALUES ('"+judul+"','"+isi+"','"+iduser+"','"+0+"','"+tanggalhariini+"','"+deadline+"','"+poin+"','"+idkategori+"','"+filetambahan+"')");
+                int isfalse = 0;
+                Boolean checkIQ = db.insertQuestion(judul,isi,iduser,isfalse,tanggalhariini,deadline, poin,idkategori,filetambahan);
                 if (!checkIQ) {
                     ArrayList<Question> listOfQuestions = new ArrayList<Question>();
                     ResultSet resultSet = db.getLatestQuestions();

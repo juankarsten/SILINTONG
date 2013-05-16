@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author GG
  */
-@WebServlet(name = "ApproveAnswer", urlPatterns = {"/ApproveAnswer"})
-public class ApproveAnswer extends HttpServlet {
+@WebServlet(name = "TransferController", urlPatterns = {"/TransferController"})
+public class TransferController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -36,40 +38,38 @@ public class ApproveAnswer extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String idanswer = request.getParameter("answerid");
+            String userasal = request.getParameter("userasal");
+            String usertujuan = request.getParameter("usertujuan");
             int poin = Integer.parseInt(request.getParameter("poin"));
-            String username = request.getParameter("username");
-            String usernamepenjawab = request.getParameter("userp");
             DBConnector db = new DBConnector();
-            db.updateAnswer(idanswer);
-            db.cutPoint(username,poin);
-            db.addPoint(usernamepenjawab, poin);
+            db.doTransfer(userasal, usertujuan, poin);
             ResultSet resultSet = db.getLatestQuestions();
+
             ArrayList<Question> listOfQuestions = new ArrayList<Question>();
-            
-                while (resultSet.next()) {
-                    String idQuestion = ""+resultSet.getObject(1);
-                    String nameCategory = ""+resultSet.getObject(2);
-                    String title = ""+resultSet.getObject(3);
-                    String content = ""+resultSet.getObject(4);
-                    String dateposted = ""+resultSet.getObject(5);
-                    String duedate = ""+resultSet.getObject(6);
-                    String point = ""+resultSet.getObject(7);   
-                    String user = ""+resultSet.getObject(8);
-                    Question qst = new Question(idQuestion,title,content,null,null,dateposted,duedate,Integer.parseInt(point),nameCategory,null);
-                    qst.setUsername(user);
-                    listOfQuestions.add(qst);
-                }
-                request.setAttribute("latestQuestion", listOfQuestions);
-                RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-                view.forward(request, response);
-        } 
-        catch (Exception e) {            
-            out.print(e);
+
+            while (resultSet.next()) {
+                String idQuestion = "" + resultSet.getObject(1);
+                String nameCategory = "" + resultSet.getObject(2);
+                String title = "" + resultSet.getObject(3);
+                String content = "" + resultSet.getObject(4);
+                String dateposted = "" + resultSet.getObject(5);
+                String duedate = "" + resultSet.getObject(6);
+                String point = "" + resultSet.getObject(7);
+                String user = "" + resultSet.getObject(8);
+
+                Question qst = new Question(idQuestion, title, content, null, null, dateposted, duedate, Integer.parseInt(point), nameCategory, null);
+                qst.setUsername(user);
+                listOfQuestions.add(qst);
+            }
+            request.setAttribute("latestQuestion", listOfQuestions);
+            RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+            view.forward(request, response);
+        } finally {
+            out.close();
         }
     }
 
@@ -86,7 +86,11 @@ public class ApproveAnswer extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(TransferController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -101,7 +105,11 @@ public class ApproveAnswer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(TransferController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

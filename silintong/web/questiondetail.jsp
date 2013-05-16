@@ -4,6 +4,7 @@
     Author     : GG
 --%>
 
+<%@page import="com.silintong.db.DBConnector"%>
 <%@page import="com.silintong.model.Rating"%>
 <%@page import="com.silintong.model.Answer"%>
 <%@page import="java.util.ArrayList"%>
@@ -79,13 +80,18 @@
 
             </div>
             <div class="large-3 columns">
-                <h5>Post A New Question</h5>
-                <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
-                <h4>Leaderboards</h4>
-                <h4>Beli Poin</h4>
-                <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
-                <img src="img/paybro.png" alt='paybro'>
-            </div>
+			<h5>Post A New Question</h5>
+                        <br/>
+                        <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
+			<h4>Leaderboards</h4>
+                        <jsp:include page="leaderboard.jsp" />
+                        <h4>Transfer Poin</h4>
+                        <a href="transfer.jsp" class="button small">Transfer</a>
+                        <h4>Beli Poin</h4>
+                        <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
+                        <img src="img/paybro.png" alt='paybro'>
+                        <hr/>
+		</div>
         </div>
         <%
                     ArrayList<Answer> answers = (ArrayList<Answer>)request.getAttribute("answers");
@@ -97,13 +103,32 @@
                                  out.print("<h4>");
                                  out.print(answers.get(cnt).getIdusername());
                                  out.print("</h4>");
+                                 out.print("<p>");
+                                 DBConnector db = new DBConnector();
+                                 String idanswer = answers.get(cnt).getIdanswer();
+                                 int totalrating = 0;
+                                 if(db.getAnswerRating(idanswer)){
+                                     totalrating = db.getRating(idanswer);
+                                 }
+                                 out.print("Total Rating: "+totalrating);
+                                 out.print("</p>");
                                  out.print("</div>");
                                  out.print("<div class='large-7 columns'>");
+                                 if(answers.get(cnt).getIsapproved().equals("true")){
+                                     out.print("<img src='img/checked.png' />");
+                                 }
                                  out.print(answers.get(cnt).getContent());
-                                 
+                                 if (username.equals(QuestionDetail.get(1))) {
+                                    out.print("<form action='ApproveAnswer' method='post' id='approveans'>");
+                                    out.print("<input type='hidden' name='username' value='"+username+"'>");
+                                    out.print("<input type='hidden' name='userp' value='"+answers.get(cnt).getIdusername()+"'>"); 
+                                    out.print("<input type='hidden' name='poin' value='"+QuestionDetail.get(5)+"'>"); 
+                                    out.print("<input type='hidden' name='answerid' value='"+answers.get(cnt).getIdanswer() +"'>");                      
+                                    out.print("<input type = 'submit' class='button small' value ='Approve this answer'>");
+                                    out.print("</form>");
+                                }
                                  out.print("</div>");
                                  out.print("<div class='large-2 columns'>");
-                                 
                                  boolean ratenow[]=new boolean[5];
 //                                 int rate=Integer.parseInt() -1;
                                  String temp=Rating.getRate(answers.get(cnt).getIdusername(), answers.get(cnt).getIdanswer());
@@ -119,8 +144,8 @@
                                          <option >5</option>
                                      </select>
                                      <input type="hidden" name="ans" value="<%=answers.get(cnt).getIdanswer() %>" />
-                                     <input type="hidden" name="user" value="<%=answers.get(cnt).getIdusername() %>" />
-                                     <input type="submit" value="rate" class="button small"/>
+                                     <input type="hidden" name="user" value="<%=username %>" />
+                                     <input type="submit" value="Rate Answer" class="button small"/>
                                  </form>
                                  <%
                                  
@@ -129,15 +154,19 @@
                                  out.print("</div>");                            
                              }
                          }
-
-            }
+                    }
+               
         %>
 
         <div class='row'>
-            <form method="post" action='PostAnswer'>
-                <input type='hidden' value='<% out.print(QuestionDetail.get(6));%>' name='idquestion'/>
-                <input type='submit'class='button' value ='Answer this Post'>
-            </form>
+            <div class="large-4 columns"></div>
+            <div class="large-4 columns">
+                <form method="post" action='PostAnswer'>
+                    <input type='hidden' value='<% out.print(QuestionDetail.get(6));%>' name='idquestion'/>
+                    <input type='submit'class='button small' value ='Answer this Post'>
+                </form>
+            </div>    
+            <div class="large-4 columns"></div>
         </div>
 
         <script>

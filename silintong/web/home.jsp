@@ -79,6 +79,8 @@
                       <li><a href="EducationCategory">Education</a>
                       <li><a href="EntertainmentCategory">Entertainment</a>
                       <li><a href="GeneralCategory">General</a>
+                      <li><a href="PayBroCategory">PayBro</a>
+                      <li><a href="RakoonCategory">Rakoon</a>
                   </ul>
 
                   <li class="divider"></li>
