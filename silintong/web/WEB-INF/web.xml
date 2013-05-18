@@ -8,6 +8,20 @@
         <servlet-name>PostAnswerController</servlet-name>
         <servlet-class>com.silintong.controller.PostAnswerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletAdaptor</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <description>Multiple packages, separated by semicolon(;), can be specified in param-value</description>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.silintong.service</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LatestQuestionsController</servlet-name>
         <url-pattern>/LatestQuestionsController</url-pattern>
@@ -15,6 +29,10 @@
     <servlet-mapping>
         <servlet-name>PostAnswerController</servlet-name>
         <url-pattern>/PostAnswerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAdaptor</servlet-name>
+        <url-pattern>/webresources/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -9,7 +9,10 @@ import com.silintong.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,8 +52,29 @@ public class DBConnector {
     
     public ResultSet getLatestQuestions() throws SQLException{
         String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser ORDER BY dateposted DESC LIMIT 0 , 10";
-         Statement statement = dbConnection.createStatement();
+         PreparedStatement statement = dbConnection.prepareStatement(query);
          ResultSet resultSet = statement.executeQuery(query); 
+        return resultSet;
+    }
+    
+    public ResultSet getQuestions(String username,String password,int limitfrom,int limitto,int idCategory) throws SQLException{
+        ResultSet rs=this.login(username, password);
+        int count=0;
+        int idUsername=0;
+        while(rs.next()){
+            if(rs.getObject(1)==null)return null;
+            
+            idUsername=Integer.parseInt(rs.getObject(1)+"");
+            count++;
+        }
+        if(count==0)return null;
+        
+        String query = "SELECT idquestion, title, content, dateposted, duedate,isanswered FROM QUESTION q WHERE q.idcategory=?  ORDER BY dateposted DESC LIMIT ? , ?";
+        PreparedStatement statement = dbConnection.prepareStatement(query);
+        statement.setInt(1, idCategory);
+        statement.setInt(2, limitfrom);
+        statement.setInt(3, limitto);
+        ResultSet resultSet = statement.executeQuery(); 
         return resultSet;
     }
     
@@ -126,6 +150,46 @@ public class DBConnector {
         statement.execute(query2); 
     }
     
+    public String insertAnswerForService(String username, String password,String content, String idQuestion){
+        ResultSet rs;
+        int idUsername=0;
+        try {
+            rs = this.login(username, password);
+            int count=0;
+            
+            while(rs.next()){
+                if(rs.getObject(1)==null)return null;
+
+                idUsername=Integer.parseInt(rs.getObject(1)+"");
+                count++;
+            }
+            if(count==0)return "unauthorized user";
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+            return "unauthorized user";
+        }
+        
+        
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        String dateposted=dateFormat.format(Calendar.getInstance().getTime());
+        String filename="";
+        String query2="INSERT INTO answer (content,idusername,idquestion,isapproved,dateposted,filename) VALUES ('"+content+"','"+idUsername+"','"+idQuestion+"','0','"+dateposted+"','"+filename+"')";
+        Statement statement;
+        try {
+            statement = dbConnection.createStatement();
+            String hasil=statement.execute(query2)+"";
+            if(hasil.equals("false")){
+                return "berhasil";
+            }else{
+                return "Ada kesalahan di server. Coba hubungin admin.";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+            return ex.toString();
+        }
+    }
+    
 
     public ResultSet getEducationCategory() throws SQLException{
         String query = "SELECT idquestion,namecategory, title, content, dateposted, duedate,pointgiven,username FROM QUESTION q,CATEGORY c, USER u WHERE q.idcategory=c.idcategory AND q.idusername=u.iduser AND q.idcategory = '1' ORDER BY dateposted DESC LIMIT 0 , 10";
@@ -133,6 +197,9 @@ public class DBConnector {
          ResultSet resultSet = statement.executeQuery(query); 
         return resultSet;
     }
+    
+    
+    
     public ResultSet getAnswer(String idquestion) throws SQLException{
         String query ="SELECT * FROM answer as an join user as u on an.idusername = u.iduser WHERE idquestion='"+idquestion+"'";
         Statement statement = dbConnection.createStatement();
