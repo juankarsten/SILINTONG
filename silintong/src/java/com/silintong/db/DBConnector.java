@@ -201,7 +201,8 @@ public class DBConnector {
     
     
     public ResultSet getAnswer(String idquestion) throws SQLException{
-        String query ="SELECT * FROM answer as an join user as u on an.idusername = u.iduser WHERE idquestion='"+idquestion+"'";
+        String query ="SELECT * FROM  answer  an , user u WHERE an.idquestion='"+idquestion+"' and "
+                + "an.idusername = u.iduser";
         Statement statement = dbConnection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         return resultSet;

@@ -99,6 +99,8 @@ public class LintongservicesResource {
             
         } catch (JSONException ex) {
             return "ada kesalahan."+ex;
+        }catch(Exception ex){
+            return "ada kesalahan."+ex;
         }
         
         return ja.toString();
