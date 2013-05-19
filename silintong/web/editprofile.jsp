@@ -4,6 +4,7 @@
     Author     : juan.karsten
 --%>
 
+<%@page import="java.io.File"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.silintong.model.User"%>
 <%@page import="com.silintong.extra.Validator"%>
@@ -53,7 +54,7 @@
              <div class="small-11 columns">
          <fieldset>
                  <legend>Update Profile</legend>
-         <form action="editprofile" method="post">
+         <form action="editprofile" method="post" enctype="multipart/form-data">
              <input type="hidden" name="username" value=<%=user.getUsername()%> />
              <input type="hidden" name="id" value=<%=user.getId() %> />
              <input type="hidden" name="poin" value=<%=user.getPoint() %> />
@@ -162,7 +163,7 @@
 
                          <div class="small-5 columns">
                                  <% if(Validator.isExist(user.getFoto())){%>
-                                 <img src="user.getFoto()" />
+                                 <img src="ReadImage?filename=<%=user.getFoto()%>" />
                                 <%}%>
                                 <input type="file" name="foto" />
 

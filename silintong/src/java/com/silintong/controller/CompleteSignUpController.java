@@ -83,7 +83,6 @@ public class CompleteSignUpController extends HttpServlet {
         String monthbday=getFieldItem(items,"monthbday");
         String yearbday=getFieldItem(items,"yearbday");
         String foto=getFieldItem(items,"foto");
-        
         String[] months={
         "January","February","March","April","May","June",
                             "July","August","September","October","November","December"
@@ -138,7 +137,7 @@ public class CompleteSignUpController extends HttpServlet {
         User user=new User(fname, lname, pass, email, username, yearbday+"-"+monthbday+"-"+datebday, sex, 500, randomFotoFile);
         if(error==0)out.print(user.insertUser(out));
         
-        
+        out.print(randomFotoFile);
         try {
             if(error==0)response.sendRedirect("index.jsp");
             else response.sendRedirect("completesignup.jsp?error="+error);
