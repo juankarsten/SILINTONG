@@ -70,6 +70,21 @@
                         </form>
                     </div>
             </div>
+                            <div class="large-3 columns">
+			<h5>Post A New Question</h5>
+                        <br/>
+                        <a  href="postquestion.jsp" ><button class='small'>Post Now!</button></a>
+			<h4>Leaderboards</h4>
+                        <jsp:include page="leaderboard.jsp" />
+                        <h4>Transfer Poin</h4>
+                        <a href="transfer.jsp" class="button small">Transfer</a>
+                        <h4>Beli Poin</h4>
+                        <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
+                         <form id="form9" action="buyPoints" method="post">
+                          <a href="javascript:;" onclick="document.getElementById('form9').submit();"><img src="img/paybro.png" alt='paybro'></a></li>
+                          <input type="hidden" name="username1" value="<% out.print(username); %>"/>
+                       </form>
+		</div>
         </div>
         
   <script>

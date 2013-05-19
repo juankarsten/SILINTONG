@@ -68,7 +68,7 @@
                       </form>
                   </li>  
                         <li class="divider"></li>
-                        <li class="has-dropdown"><a href="#">All Categories</a>
+                        <li class="has-dropdown active"><a href="#">All Categories</a>
                   <ul class="dropdown">
                       <li><a href="EducationCategory">Education</a>
                       <li><a href="EntertainmentCategory">Entertainment</a>
@@ -95,7 +95,7 @@
             </nav>
 
             <div class="small-9 columns">
-                <legend><h3>Forum Tanya Jawab Rakoon</h3><img src="img/rakoon.png" alt='paybro'></legend>
+                <legend><h3>Forum Tanya Jawab Rakoon</h3><img src="img/rakoon.png" alt='Rakoon'></legend>
                 <hr/>
                 <%
                ArrayList<Question> listOfQst = (ArrayList<Question>)request.getAttribute("latestQuestion");
@@ -186,7 +186,10 @@
                 <a href="transfer.jsp" class="button small">Transfer</a>
                 <h4>Beli Poin</h4>
                 <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
-                <img src="img/paybro.png" alt='paybro'>
+                <form id="form9" action="buyPoints" method="post">
+                          <a href="javascript:;" onclick="document.getElementById('form9').submit();"><img src="img/paybro.png" alt='paybro'></a></li>
+                          <input type="hidden" name="username1" value="<% out.print(username); %>"/>
+                       </form>
             </div>
         </div>
 

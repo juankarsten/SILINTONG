@@ -42,7 +42,7 @@
                         String username = usersession.nextElement().toString();
                         out.print(username);
                     %>!</h3>
-                <p>Edit Profile</p>	
+                <p><a href="editprofile.jsp" class="button">Edit Profile</a></p>	
                 <a href="Logout" class='alert button tiny round right'>
                     Logout
                 </a>
@@ -67,7 +67,7 @@
                       </form>
                   </li>  
                         <li class="divider"></li>
-                        <li class="has-dropdown"><a href="#">All Categories</a>
+                        <li class="has-dropdown active"><a href="#">All Categories</a>
                   <ul class="dropdown">
                       <li><a href="EducationCategory">Education</a>
                       <li><a href="EntertainmentCategory">Entertainment</a>
@@ -182,7 +182,10 @@
                 <jsp:include page="leaderboard.jsp" />
                 <h4>Beli Poin</h4>
                 <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
-                <img src="img/paybro.png" alt='paybro'>
+                 <form id="form9" action="buyPoints" method="post">
+                          <a href="javascript:;" onclick="document.getElementById('form9').submit();"><img src="img/paybro.png" alt='paybro'></a></li>
+                          <input type="hidden" name="username1" value="<% out.print(username); %>"/>
+                       </form>
             </div>
         </div>
 

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : mainpage
+    Document   : buypoints
     Created on : May 13, 2013, 11:11:04 AM
     Author     : GG
 --%>
@@ -68,8 +68,8 @@
                   <li><a href="latestQuestions">Latest Questions</a></li>
                   <li class="divider"></li>
                   <li>
-                      <form id="form1" action="#" method="post">
-                          <li class="active"><a href="javascript:;" onclick="document.getElementById('form1').submit();">My Questions</a></li>
+                      <form id="form1" action="myquestions" method="post">
+                          <li><a href="javascript:;" onclick="document.getElementById('form1').submit();">My Questions</a></li>
                           <input type="hidden" name="username" value="<% out.print(username); %>"/>
                       </form>
                   </li>  
@@ -103,78 +103,35 @@
             </nav>
 
             <div class="small-9 columns">
-                <%
-                    ArrayList<Question> listOfQst = (ArrayList<Question>) request.getAttribute("myQuestions");
-                    if (listOfQst != null) {
-                        if (!listOfQst.isEmpty()) {
-                            out.print("<table>");
-                            out.print("<thead>");
-                            out.print("<tr>");
-                            out.print("<td>");
-                            out.print("Category");
-                            out.print("</td>");
-                            out.print("<td width='290'>");
-                            out.print("Title");
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print("Posted");
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print("Duedate");
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print("Points");
-                            out.print("</td>");
-                            out.print("<td>");
-                            out.print("Action");
-                            out.print("</td>");
-                            out.print("</tr>");
-                            out.print("</thead>");
-
-                            out.print("<tbody>");
-                            for (int cnt = 0; cnt < listOfQst.size(); cnt++) {
-                                out.print("<tr>");
-                                out.print("<td>");
-                                out.print(listOfQst.get(cnt).getIdcategories());
-                                out.print("</td>");
-                                out.print("<td>");
-                                out.print(listOfQst.get(cnt).getTitle());
-                                out.print("</td>");
-                                out.print("<td>");
-                                out.print(listOfQst.get(cnt).getDateposted());
-                                out.print("</td>");
-                                out.print("<td>");
-                                out.print(listOfQst.get(cnt).getDuedate());
-                                out.print("</td>");
-                                out.print("<td>");
-                                out.print(listOfQst.get(cnt).getPoint());
-                                out.print("</td>");
-                                out.print("<td>");
-                                out.print("<br>");
-                                out.print("<form action='QuestionDetail' method ='post'>");
-                                out.print("<input type='hidden' name='idpertanyaan' value='" + listOfQst.get(cnt).getIdQuestion() + "'>");
-                                out.print("<input type='hidden' name='konten' value='" + listOfQst.get(cnt).getContent() + "'>");
-                                out.print("<input type='hidden' name='namakategori' value='" + listOfQst.get(cnt).getIdcategories() + "'>");
-                                out.print("<input type='hidden' name='userposter' value='" + listOfQst.get(cnt).getUsername() + "'>");
-                                out.print("<input type='hidden' name='qtitle' value='" + listOfQst.get(cnt).getTitle() + "'>");
-                                out.print("<input type='hidden' name='duedate' value='" + listOfQst.get(cnt).getDuedate() + "'>");
-                                out.print("<input type='hidden' name='poin' value='" + listOfQst.get(cnt).getPoint() + "'>");
-                                out.print("<input type='hidden' name='username' value='" + username + "'>");
-                                out.print("<input class='small button' type='submit' value='Details'>");
-                                out.print("<input type='hidden' name='username' value='" + username + "'/>");
-                                out.print("</form>");
-                                out.print("</td>");
-                                out.print("</tr>");
-                            }
-                            out.print("</tbody>");
-                            out.print("</table>");
-                        }
-
-                    } else if (listOfQst == null) {
-                        out.print("No Questions Posted yet.");
-                    }
-
-                %>
+                <h2>Buy Points</h2>
+                <h4>Powered by PayBro</h4>
+                <hr/>
+                   <form action="buyPointsPost" method="post">
+                       <p>BuyPoints! merupakan sarana pembelian poin dengan menggunakan layanan bantuan dari
+                    PayBro selaku client dari web kami. Untuk keperluan pembayaran, silahkan cantumkan pesan
+                    pembayaran Anda pada message untuk diverifikasi oleh PayBro.<br/>Selamat bertransaksi!
+                       </P>
+                       <hr/>
+                       <p>
+                           Poin Anda saat ini : <% out.print(request.getAttribute("userpoint1"));%>  
+                       </p>
+                       <p>
+                           Harga : <br/>
+                           10 Points  : IDR 30.000<br/>
+                           20 Points  : IDR 50.000<br/>
+                           50 Points  : IDR 130.000<br/>
+                           100 Points : IDR 240.000<br/><br/>
+                           Amount of Points:<br/></p>
+                    <input type="radio" name="poin" value="10"> 10<br/>
+                        <input type="radio" name="poin" value="20"> 20<br/>
+                        <input type="radio" name="poin" value="50"> 50<br/>
+                        <input type="radio" name="poin" value="100"> 100
+                        <br/>
+                        <br/>
+                        <textarea id="answercontent" placeholder="Write your payment message here." name="answercontent"/></textarea>
+                        <input type ='submit' value ='Buy Points!' class='button left small'/>
+                        <input type ='hidden' name='username' value ='<% out.print(username);%>'/>
+                   </form>
 
             </div>
 
@@ -188,10 +145,7 @@
                 <a href="transfer.jsp" class="button small">Transfer</a>
                 <h4>Beli Poin</h4>
                 <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
-                 <form id="form9" action="buyPoints" method="post">
-                          <a href="javascript:;" onclick="document.getElementById('form9').submit();"><img src="img/paybro.png" alt='paybro'></a></li>
-                          <input type="hidden" name="username1" value="<% out.print(username); %>"/>
-                       </form>
+                <img src="img/paybro.png" alt='paybro'>
             </div>
 
             

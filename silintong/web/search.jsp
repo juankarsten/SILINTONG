@@ -67,7 +67,7 @@
                 <ul class="left">
                   <li class="divider"></li>
                   
-                  <li><a href="#">Latest Questions</a></li>
+                  <li><a href="latestQuestions">Latest Questions</a></li>
                   <li class="divider"></li>
                   <li>
                       <form id="form1" action="myquestions" method="post">
@@ -185,7 +185,10 @@
                         <jsp:include page="leaderboard.jsp" />
                         <h4>Beli Poin</h4>
                         <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
-                        <img src="img/paybro.png" alt='paybro'>
+                       <form id="form9" action="buyPoints" method="post">
+                          <a href="javascript:;" onclick="document.getElementById('form9').submit();"><img src="img/paybro.png" alt='paybro'></a></li>
+                          <input type="hidden" name="username1" value="<% out.print(username); %>"/>
+                       </form>
 		</div>
 	</div>
 
