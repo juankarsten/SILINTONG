@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://152.118.26.22:8080/PayBro/PayBro?wsdl" uri="wsdl/152.118.26.22_8080/PayBro/PayBro.wsdl"/>
+    <system systemId="http://152.118.26.22:8080/PayBro/PayBro?xsd=1" uri="wsdl/152.118.26.22_8080/PayBro/PayBro.xsd_1.xsd"/>
+</catalog>

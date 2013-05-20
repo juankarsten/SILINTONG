@@ -115,6 +115,17 @@
                        <p>
                            Poin Anda saat ini : <% out.print(request.getAttribute("userpoint1"));%>  
                        </p>
+                       <fieldset>
+                           <legend>Your PayBro Account</legend>
+                           <div  class="small-7 columns">
+                               <label for="userPaybro">Username</label>
+                               <input  type="text" id="userPaybro" placeholder="PayBro Username" name="userPaybro"/>
+                               <label for="passwordPaybro">Password</label>
+                               <input type="password" id="passwordPaybro" placeholder="PayBro Password" name="passwordPaybro"/>
+                               <input type="hidden" id="username" name="username" value="<% out.print(username); %>"/>
+                           </div>
+                       
+                       </fieldset>
                        <p>
                            Harga : <br/>
                            10 Points  : IDR 30.000<br/>
@@ -147,8 +158,6 @@
                 <p>Untuk para Silintongers yang ingin membeli poin, dapat membeli via:</p>
                 <img src="img/paybro.png" alt='paybro'>
             </div>
-
-            
 	</div>
 
   <script>

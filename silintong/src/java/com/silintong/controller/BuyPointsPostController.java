@@ -47,9 +47,18 @@ public class BuyPointsPostController extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String uname = request.getParameter("username");
-            int poin = Integer.parseInt(request.getParameter("poin"));
-            DBConnector db = new DBConnector();
-            db.addPoint(uname, poin);
+            String userPaybro = request.getParameter("userPaybro");
+            String passwordPaybro = request.getParameter("passwordPaybro");
+            String usernameAccount = "silintong";
+            String passwordAccount = "silintong123";
+            String description = request.getParameter("answercontent");
+            int poin = Integer.parseInt("50000");
+            
+            boolean result = payWithPayBro(usernameAccount,passwordAccount,userPaybro,passwordPaybro,poin,description);
+            if(result){
+                DBConnector db = new DBConnector();
+                db.addPoint(uname, poin);
+            }
             
             RequestDispatcher view=request.getRequestDispatcher("latestQuestions");
             view.forward(request, response);
@@ -105,4 +114,13 @@ public class BuyPointsPostController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static Boolean payWithPayBro(java.lang.String aUName, java.lang.String aPass, java.lang.String cUName, java.lang.String cPass, int amount, java.lang.String description) {
+        pb.services.PayBro_Service service = new pb.services.PayBro_Service();
+        pb.services.PayBro port = service.getPayBroPort();
+        return port.payWithPayBro(aUName, aPass, cUName, cPass, amount, description);
+    }
+
+    
+
 }
