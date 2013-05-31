@@ -340,7 +340,9 @@ public class DBConnector {
         if (rs.next() && ra.next()){
             String iduser =rs.getObject(1).toString();
             int poinuser = Integer.parseInt(ra.getObject(1).toString());
-            String updateTableSQL ="update user set poin = ("+poinuser+"+"+poin+")where iduser = '"+iduser+"'";
+            poinuser = poinuser + poin;
+            
+            String updateTableSQL ="update user set poin = ("+poinuser+")where iduser = '"+iduser+"'";
             PreparedStatement statement;
             statement = dbConnection.prepareStatement(updateTableSQL);
             statement.executeUpdate();        

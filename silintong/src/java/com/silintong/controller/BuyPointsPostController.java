@@ -52,9 +52,21 @@ public class BuyPointsPostController extends HttpServlet {
             String usernameAccount = "silintong";
             String passwordAccount = "silintong123";
             String description = request.getParameter("answercontent");
-            int poin = Integer.parseInt("50000");
+            String points = request.getParameter("poin");
+            int poin = Integer.parseInt(points);
+            int amountToPay = 0;
+                    
+            if(poin == 10){
+                amountToPay = 30000;
+            } else if (poin == 20){
+                amountToPay = 50000;
+            } else if (poin == 50){
+                amountToPay = 130000;
+            } else if (poin == 100){
+                amountToPay = 240000;
+            }
             
-            boolean result = payWithPayBro(usernameAccount,passwordAccount,userPaybro,passwordPaybro,poin,description);
+            boolean result = payWithPayBro(usernameAccount,passwordAccount,userPaybro,passwordPaybro,amountToPay,description);
             if(result){
                 DBConnector db = new DBConnector();
                 db.addPoint(uname, poin);
